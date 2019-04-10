@@ -101,7 +101,7 @@ class Main extends Component {
               </Breadcrumb>
               <div className={styles.content}>
                 <Switch>
-                  <Route path="/" component={User} />
+                  <Route exact path="/" component={User} />
                   <Route path="/users" component={User} />
                   <Route path="/area" component={() => <Linechart data={data}></Linechart>} />
                   <Route render={() => <h1 className={styles.noMatch}><FormattedMessage id='404_NOTFOUND'></FormattedMessage></h1>} />
