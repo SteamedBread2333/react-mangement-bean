@@ -1,7 +1,14 @@
-import ReactDOM from 'react-dom'
 import React from 'react'
+import ReactDOM from 'react-dom'
+import { useStrict } from 'mobx'
+
+useStrict(true)
+
+if (module.hot) {
+  module.hot.accept();
+}
 
 ReactDOM.render(
-    <div style={{height: '100vh'}}>
-      hello auth
-    </div>, document.getElementById('root'))
+  <div>hello auth!!</div>,
+  document.getElementById('root')
+)

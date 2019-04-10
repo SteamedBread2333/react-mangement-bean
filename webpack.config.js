@@ -7,15 +7,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob');
 
 const webpackConfig = {
-  // entry: [
-  //   'webpack-hot-middleware/client',//当发生热更新时控制台会有提示,生成的bundle.js存储在内存中
-  //   './src/index.js'//入口文件
-  // ],
   entry: {},
   output: {
     filename: '[name].bundle.js',//打包后的文件名
     chunkFilename: '[name].[chunkhash:5].js',
-    path:path.resolve(__dirname, './dist/'),//打包后的文件存储位置
+    path: path.resolve(__dirname, './dist/'),//打包后的文件存储位置
     publicPath: '/dist/'
   },
 
@@ -69,16 +65,22 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),//代码热替换
+
     new webpack.NoEmitOnErrorsPlugin(),//报错时不退出webpack进程
+
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')//用于区分开发和生产环境
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer],//css样式及设备适配处理
-        url: { limit: 10240 }
+        url: { limit: 10240 },
       }
     }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'manifest',
+    //   chunks: ['vendor']
+    // }),
   ],
 }
 
@@ -86,25 +88,27 @@ const webpackConfig = {
 function getEntries(globPath) {
   const files = glob.sync(globPath),
     entries = {};
-  files.forEach(function(filepath) {
-      const split = filepath.split('/');
-      const name = split[split.length - 2];
-      entries[name] = './' + filepath;
+  files.forEach(function (filepath) {
+    const split = filepath.split('/');
+    const name = split[split.length - 2];
+    entries[name] = './' + filepath;
   });
   return entries;
 }
-     
+
 const entries = getEntries('src/entries/**/index.js');
 
-Object.keys(entries).forEach(function(name) {
- webpackConfig.entry[name] = entries[name];
- const plugin = new HtmlWebpackPlugin({
-     filename: name + '.html',
-     template: './src/views/index.html',
-     inject: true,
-     chunks: [name]
- });
- webpackConfig.plugins.push(plugin);
+Object.keys(entries).forEach(function (name) {
+  // 此处连同热加载一起编译
+  webpackConfig.entry[name] = [path.resolve(__dirname, entries[name]), require.resolve('webpack-hot-middleware/client', 'webpack/hot/only-dev-server')];
+  // console.log(webpackConfig)
+  const plugin = new HtmlWebpackPlugin({
+    filename: name + '.html',
+    template: './src/views/index.html',
+    inject: true,
+    chunks: [name]
+  });
+  webpackConfig.plugins.push(plugin);
 })
 
 module.exports = webpackConfig;

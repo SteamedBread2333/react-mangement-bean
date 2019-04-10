@@ -107,25 +107,25 @@ const webpackConfig = {
 function getEntries(globPath) {
   const files = glob.sync(globPath),
     entries = {};
-  files.forEach(function(filepath) {
-      const split = filepath.split('/');
-      const name = split[split.length - 2];
-      entries[name] = './' + filepath;
+  files.forEach(function (filepath) {
+    const split = filepath.split('/');
+    const name = split[split.length - 2];
+    entries[name] = './' + filepath;
   });
   return entries;
 }
-     
+
 const entries = getEntries('src/entries/**/index.js');
 
-Object.keys(entries).forEach(function(name) {
- webpackConfig.entry[name] = entries[name];
- const plugin = new HtmlWebpackPlugin({
-     filename: name + '.html',
-     template: './src/views/index.html',
-     inject: true,
-     chunks: [name]
- });
- webpackConfig.plugins.push(plugin);
+Object.keys(entries).forEach(function (name) {
+  webpackConfig.entry[name] = [path.resolve(__dirname, entries[name])];
+  const plugin = new HtmlWebpackPlugin({
+    filename: name + '.html',
+    template: './src/views/index.html',
+    inject: true,
+    chunks: [name]
+  });
+  webpackConfig.plugins.push(plugin);
 })
 
 module.exports = webpackConfig;
