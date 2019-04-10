@@ -5,14 +5,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const themeConfig = require('./src/theme')
 
-module.exports = {
-  entry: {
-    main: './src/index.js',//入口文件
-    vendor: [
-      'react',
-      'react-dom'
-    ]//分离第三方库
-  },
+const glob = require('glob');
+
+const webpackConfig = {
+  // entry: {
+  //   main: './src/index.js',//入口文件
+  //   vendor: [
+  //     'react',
+  //     'react-dom'
+  //   ]//分离第三方库
+  // },
+  entry: {},
   output: {
     filename: '[name].[chunkhash:5].js',//打包后的文件名
     chunkFilename: '[name].[chunkhash:5].js',
@@ -99,3 +102,30 @@ module.exports = {
     })
   ],
 }
+
+// 获取指定路径下的入口文件
+function getEntries(globPath) {
+  const files = glob.sync(globPath),
+    entries = {};
+  files.forEach(function(filepath) {
+      const split = filepath.split('/');
+      const name = split[split.length - 2];
+      entries[name] = './' + filepath;
+  });
+  return entries;
+}
+     
+const entries = getEntries('src/entries/**/index.js');
+
+Object.keys(entries).forEach(function(name) {
+ webpackConfig.entry[name] = entries[name];
+ const plugin = new HtmlWebpackPlugin({
+     filename: name + '.html',
+     template: './src/views/index.html',
+     inject: true,
+     chunks: [name]
+ });
+ webpackConfig.plugins.push(plugin);
+})
+
+module.exports = webpackConfig;

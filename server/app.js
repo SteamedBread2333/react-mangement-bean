@@ -70,7 +70,14 @@ router.get('*', async (ctx, next) => {
 				</head>
 				<body>
 				<div id="root" style="height: 100%;"></div>
-				<script src="/dist/bundle.js"></script>
+				<script>
+					var head= document.getElementsByTagName('head')[0]; 
+					var script= document.createElement('script'); 
+					script.type= 'text/javascript'; 
+					var src = '/dist/' + (window.location.pathname.split('/')[1] || 'app') + '.bundle.js'; 
+					script.src= src
+					head.appendChild(script); 
+				</script>
 				</body>
 				</html>`
 })

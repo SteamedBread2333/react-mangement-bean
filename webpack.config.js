@@ -2,16 +2,20 @@ const path = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const themeConfig = require('./src/theme')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-  entry: [
-    'webpack-hot-middleware/client',//当发生热更新时控制台会有提示,生成的bundle.js存储在内存中
-    './src/index.js'//入口文件
-  ],
+const glob = require('glob');
+
+const webpackConfig = {
+  // entry: [
+  //   'webpack-hot-middleware/client',//当发生热更新时控制台会有提示,生成的bundle.js存储在内存中
+  //   './src/index.js'//入口文件
+  // ],
+  entry: {},
   output: {
-    filename: 'bundle.js',//打包后的文件名
+    filename: '[name].bundle.js',//打包后的文件名
     chunkFilename: '[name].[chunkhash:5].js',
-    path: path.join(__dirname, 'dist'),//打包后的文件存储位置
+    path:path.resolve(__dirname, './dist/'),//打包后的文件存储位置
     publicPath: '/dist/'
   },
 
@@ -74,6 +78,33 @@ module.exports = {
         postcss: () => [autoprefixer],//css样式及设备适配处理
         url: { limit: 10240 }
       }
-    })
+    }),
   ],
 }
+
+// 获取指定路径下的入口文件
+function getEntries(globPath) {
+  const files = glob.sync(globPath),
+    entries = {};
+  files.forEach(function(filepath) {
+      const split = filepath.split('/');
+      const name = split[split.length - 2];
+      entries[name] = './' + filepath;
+  });
+  return entries;
+}
+     
+const entries = getEntries('src/entries/**/index.js');
+
+Object.keys(entries).forEach(function(name) {
+ webpackConfig.entry[name] = entries[name];
+ const plugin = new HtmlWebpackPlugin({
+     filename: name + '.html',
+     template: './src/views/index.html',
+     inject: true,
+     chunks: [name]
+ });
+ webpackConfig.plugins.push(plugin);
+})
+
+module.exports = webpackConfig;

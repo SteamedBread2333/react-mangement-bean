@@ -6,9 +6,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
 // import 'moment/locale/zh-cn'
 // moment.locale('zh-cn')
 
-import App from './components/App'
+import App from '../../components/App'
 
-import appStore from './stores/appStore'
+import appStore from '../../stores/appStore'
 
 const stores = { appStore }
 
