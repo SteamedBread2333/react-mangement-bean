@@ -100,7 +100,7 @@ const entries = getEntries('src/entries/**/index.js');
 
 Object.keys(entries).forEach(function (name) {
   // 此处连同热加载一起编译
-  webpackConfig.entry[name] = [path.resolve(__dirname, entries[name]), require.resolve('webpack-hot-middleware/client', 'webpack/hot/only-dev-server')];
+  webpackConfig.entry[name] = [path.resolve(__dirname, entries[name]), require.resolve('webpack-hot-middleware/client')];
   // console.log(webpackConfig)
   const plugin = new HtmlWebpackPlugin({
     filename: name + '.html',

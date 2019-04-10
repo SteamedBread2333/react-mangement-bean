@@ -128,4 +128,6 @@ Object.keys(entries).forEach(function (name) {
   webpackConfig.plugins.push(plugin);
 })
 
+webpackConfig.entry.vendor = ['react', 'react-dom']
+
 module.exports = webpackConfig;
