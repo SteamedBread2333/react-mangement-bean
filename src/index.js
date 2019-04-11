@@ -15,6 +15,9 @@ const stores = { appStore }
 
 useStrict(true)
 
+if (module.hot) {
+  module.hot.accept();
+}
 
 ReactDOM.render(
   <Provider {...stores}>

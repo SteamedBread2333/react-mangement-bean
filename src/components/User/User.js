@@ -43,6 +43,11 @@ for (let i = 0; i < 100; i++) {
 
 @inject('appStore') @observer
 class User extends Component {
+
+  componentDidMount() {
+    console.log(this.props.location)
+  }
+
   render() {
     return (
       <Layout>
