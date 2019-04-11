@@ -8,19 +8,19 @@ const themeConfig = require('./src/theme')
 const glob = require('glob');
 
 const webpackConfig = {
-  // entry: {
-  //   main: './src/index.js',//入口文件
-  //   vendor: [
-  //     'react',
-  //     'react-dom'
-  //   ]//分离第三方库
-  // },
+  entry: {
+    main: './src/index.js',//入口文件
+    vendor: [
+      'react',
+      'react-dom'
+    ]//分离第三方库
+  },
   entry: {},
   output: {
     filename: '[name].[chunkhash:5].js',//打包后的文件名
     chunkFilename: '[name].[chunkhash:5].js',
     path: path.join(__dirname, 'dist'),//打包后的文件存储位置
-    publicPath: '/'
+    publicPath: './'
   },
 
   resolve: {
@@ -94,40 +94,66 @@ const webpackConfig = {
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer],//css前缀补全以及兼容
-        url: { limit: 10240 }
+        url: { limit: 10240 },
+        loaders: [
+          {
+            test: /\.(js|jsx)$/,
+            loader: 'babel',
+            include: path.join(__dirname, 'src'),
+            query: {
+              plugins: [
+                ["react-transform", {
+                  transforms: [{
+                    transform: "react-transform-hmr",
+                    imports: ["react"],
+                    locals: ["module"]
+                  }, {
+                    "transform": "react-transform-catch-errors",
+                    "imports": ["react", "redbox-react"]
+                  }]
+                }]
+              ]
+            }
+          }
+        ]
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'] // 指定公共 bundle 的名字,加manifest防止vendor的hash值改变。
-    })
+      name: 'manifest',
+      chunks: ['vendor']
+    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'manifest',
+    //   chunks: ['vendor'] // 指定公共 bundle 的名字,加manifest防止vendor的hash值改变。
+    // })
   ],
 }
 
-// 获取指定路径下的入口文件
-function getEntries(globPath) {
-  const files = glob.sync(globPath),
-    entries = {};
-  files.forEach(function (filepath) {
-    const split = filepath.split('/');
-    const name = split[split.length - 2];
-    entries[name] = './' + filepath;
-  });
-  return entries;
-}
+// // 获取指定路径下的入口文件
+// function getEntries(globPath) {
+//   const files = glob.sync(globPath),
+//     entries = {};
+//   files.forEach(function (filepath) {
+//     const split = filepath.split('/');
+//     const name = split[split.length - 2];
+//     entries[name] = './' + filepath;
+//   });
+//   return entries;
+// }
 
-const entries = getEntries('src/entries/**/index.js');
+// const entries = getEntries('src/entries/**/index.js');
 
-Object.keys(entries).forEach(function (name) {
-  webpackConfig.entry[name] = [path.resolve(__dirname, entries[name])];
-  const plugin = new HtmlWebpackPlugin({
-    filename: name + '.html',
-    template: './src/views/index.html',
-    inject: true,
-    chunks: [name]
-  });
-  webpackConfig.plugins.push(plugin);
-})
+// Object.keys(entries).forEach(function (name) {
+//   webpackConfig.entry[name] = [path.resolve(__dirname, entries[name])];
+//   const plugin = new HtmlWebpackPlugin({
+//     filename: name + '.html',
+//     template: './src/views/index.html',
+//     inject: true,
+//     chunks: [name]
+//   });
+//   webpackConfig.plugins.push(plugin);
+// })
 
-webpackConfig.entry.vendor = ['react', 'react-dom']
+// webpackConfig.entry.vendor = ['react', 'react-dom']
 
 module.exports = webpackConfig;

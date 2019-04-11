@@ -2,13 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
+// import { HashRouter as Router } from 'react-router-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 // import 'moment/locale/zh-cn'
 // moment.locale('zh-cn')
 
-import App from '../../components/App'
+import App from './components/App'
 
-import appStore from '../../stores/appStore'
+import appStore from './stores/appStore'
 
 const stores = { appStore }
 
@@ -20,7 +21,7 @@ if (module.hot) {
 
 ReactDOM.render(
   <Provider {...stores}>
-    <Router basename="/app">
+    <Router basename="">
       <App />
     </Router>
   </Provider>,

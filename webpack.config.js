@@ -7,7 +7,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob');
 
 const webpackConfig = {
-  entry: {},
+  entry: [
+    'webpack-hot-middleware/client',//当发生热更新时控制台会有提示,生成的bundle.js存储在内存中
+    './src/index.js'//入口文件
+  ],
   output: {
     filename: '[name].bundle.js',//打包后的文件名
     chunkFilename: '[name].[chunkhash:5].js',
@@ -84,31 +87,31 @@ const webpackConfig = {
   ],
 }
 
-// 获取指定路径下的入口文件
-function getEntries(globPath) {
-  const files = glob.sync(globPath),
-    entries = {};
-  files.forEach(function (filepath) {
-    const split = filepath.split('/');
-    const name = split[split.length - 2];
-    entries[name] = './' + filepath;
-  });
-  return entries;
-}
+// // 获取指定路径下的入口文件
+// function getEntries(globPath) {
+//   const files = glob.sync(globPath),
+//     entries = {};
+//   files.forEach(function (filepath) {
+//     const split = filepath.split('/');
+//     const name = split[split.length - 2];
+//     entries[name] = './' + filepath;
+//   });
+//   return entries;
+// }
 
-const entries = getEntries('src/entries/**/index.js');
+// const entries = getEntries('src/entries/**/index.js');
 
-Object.keys(entries).forEach(function (name) {
-  // 此处连同热加载一起编译
-  webpackConfig.entry[name] = [path.resolve(__dirname, entries[name]), require.resolve('webpack-hot-middleware/client')];
-  // console.log(webpackConfig)
-  const plugin = new HtmlWebpackPlugin({
-    filename: name + '.html',
-    template: './src/views/index.html',
-    inject: true,
-    chunks: [name]
-  });
-  webpackConfig.plugins.push(plugin);
-})
+// Object.keys(entries).forEach(function (name) {
+//   // 此处连同热加载一起编译
+//   webpackConfig.entry[name] = [path.resolve(__dirname, entries[name]), require.resolve('webpack-hot-middleware/client')];
+//   // console.log(webpackConfig)
+//   const plugin = new HtmlWebpackPlugin({
+//     filename: name + '.html',
+//     template: './src/views/index.html',
+//     inject: true,
+//     chunks: [name]
+//   });
+//   webpackConfig.plugins.push(plugin);
+// })
 
 module.exports = webpackConfig;
