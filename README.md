@@ -10,7 +10,6 @@
 # 介绍
 ## 1. 功能介绍
 #### 实现组件懒加载功能，提取第三方库，样式的autoprefixer，样式采用less以及css modules
-#### 通过glob实现支持多入口配置，详见webpack添加
 #### 为后台管理系统量身打造的框架
 ## 2. 使用技术
 ### [react](https://facebook.github.io/react/)

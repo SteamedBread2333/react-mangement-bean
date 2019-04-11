@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
-// import { HashRouter as Router } from 'react-router-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 // import 'moment/locale/zh-cn'
 // moment.locale('zh-cn')
@@ -15,13 +14,10 @@ const stores = { appStore }
 
 useStrict(true)
 
-if (module.hot) {
-  module.hot.accept();
-}
 
 ReactDOM.render(
   <Provider {...stores}>
-    <Router basename="">
+    <Router basename="/">
       <App />
     </Router>
   </Provider>,
