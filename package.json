@@ -42,7 +42,7 @@
     "webpack": "^2.4.1"
   },
   "dependencies": {
-    "antd": "^2.9.3",
+    "antd": "^3.16.2",
     "axios": "^0.16.1",
     "echarts": "^4.2.1",
     "immutable": "^4.0.0-rc.12",

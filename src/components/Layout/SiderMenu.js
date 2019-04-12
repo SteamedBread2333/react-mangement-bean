@@ -48,13 +48,16 @@ class SiderMenu extends Component {
     return (
       <IntlProvider locale="en" messages={langType}>
         <Sider
+          theme='light'
           collapsible
+          style={{borderRight: '1px solid #efefef'}}
           collapsed={appStore.collapsed}
           onCollapse={appStore.onCollapse}
         >
           <div className={styles.logo} style={{ visibility: appStore.collapsed ? 'hidden' : 'visible' }}><FormattedMessage id='APP_NAME'></FormattedMessage></div>
           <Menu
-            theme="dark"
+            theme="light"
+            style={{border: 'none'}}
             mode={appStore.siderMode}
             defaultSelectedKeys={[defaultSelectedKeys]}
             selectedKeys={[defaultSelectedKeys]}

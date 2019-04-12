@@ -55,25 +55,28 @@ class Main extends Component {
 
     return (
       <IntlProvider locale="en" messages={langType}>
-        <Layout className={styles.layoutHasSider}>
-          <SiderMenu store={this.props.appStore} />
-          <Layout>
-            <Header className={styles.header}>
-              <Menu mode="horizontal" onClick={handleHeaderChick}>
-                <SubMenu
-                  title={administratorInfo.name}
-                >
-                  <Menu.Item key="logout"><FormattedMessage id='LOG_OUT'></FormattedMessage></Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  title={<FormattedMessage id='LANGUAGE'></FormattedMessage>}
-                >
-                  <Menu.Item value='ch' key="ch">中文</Menu.Item>
-                  <Menu.Item value='en' key="en">English</Menu.Item>
-                </SubMenu>
-              </Menu>
-            </Header>
-            {/* <Tabs hideAdd type="editable-card" activeKey={activeTab.pathname} onChange={this.onTabChange.bind(this)} onEdit={this.onTabEdit.bind(this)}>
+        <Layout>
+
+          <Layout className={styles.layoutHasSider}>
+
+            <SiderMenu store={this.props.appStore} />
+            <Layout>
+              <Header className={styles.header}>
+                <Menu mode="horizontal" onClick={handleHeaderChick}>
+                  <SubMenu
+                    title={administratorInfo.name}
+                  >
+                    <Menu.Item key="logout"><FormattedMessage id='LOG_OUT'></FormattedMessage></Menu.Item>
+                  </SubMenu>
+                  <SubMenu
+                    title={<FormattedMessage id='LANGUAGE'></FormattedMessage>}
+                  >
+                    <Menu.Item value='ch' key="ch">中文</Menu.Item>
+                    <Menu.Item value='en' key="en">English</Menu.Item>
+                  </SubMenu>
+                </Menu>
+              </Header>
+              {/* <Tabs hideAdd type="editable-card" activeKey={activeTab.pathname} onChange={this.onTabChange.bind(this)} onEdit={this.onTabEdit.bind(this)}>
               {
                 tabBarList.map((item, index) => {
                   return (
@@ -95,19 +98,20 @@ class Main extends Component {
                 })
               }
             </Tabs> */}
-            <Content style={{ margin: '0 16px' }} className={styles.contentWrapper}>
-              <Breadcrumb style={{ margin: '12px 0' }}>
-                {getBreadInfo(this.props.location.pathname).map((item, index) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)}
-              </Breadcrumb>
-              <div className={styles.content}>
-                <Switch>
-                  <Route exact path="/" component={User} />
-                  <Route path="/users" component={User} />
-                  <Route path="/area" component={() => <Linechart data={data}></Linechart>} />
-                  <Route render={() => <h1 className={styles.noMatch}><FormattedMessage id='404_NOTFOUND'></FormattedMessage></h1>} />
-                </Switch>
-              </div>
-            </Content>
+              <Content style={{ margin: '0 16px' }} className={styles.contentWrapper}>
+                <Breadcrumb style={{ margin: '12px 0' }}>
+                  {getBreadInfo(this.props.location.pathname).map((item, index) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)}
+                </Breadcrumb>
+                <div className={styles.content}>
+                  <Switch>
+                    <Route exact path="/" component={User} />
+                    <Route path="/users" component={User} />
+                    <Route path="/area" component={() => <Linechart data={data}></Linechart>} />
+                    <Route render={() => <h1 className={styles.noMatch}><FormattedMessage id='404_NOTFOUND'></FormattedMessage></h1>} />
+                  </Switch>
+                </div>
+              </Content>
+            </Layout>
           </Layout>
         </Layout>
       </IntlProvider>

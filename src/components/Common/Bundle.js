@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import {Spin} from 'antd'
+import {Spin, Icon} from 'antd'
 import styles from './Bundle.less'
+
+const LoadingIcon = <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin />;
+
+Spin.setDefaultIndicator(LoadingIcon)
 
 class Bundle extends Component {
   state = {
