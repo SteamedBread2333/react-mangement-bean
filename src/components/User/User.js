@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react'
 import { Layout, Icon, Button, Table, DatePicker, Input } from 'antd'
 import OperationBar from '../../components/Layout/OperationBar.js'
 import { FormattedMessage } from 'react-intl';
+import DerbyIcon from '../Common/DerbyIcon'
 
 const { Content } = Layout
 
@@ -52,6 +53,7 @@ class User extends Component {
     return (
       <Layout>
         <OperationBar>
+          <DerbyIcon type="icon-tuichu" />
           <DatePicker
             showTime
             format="YYYY-MM-DD HH:mm:ss"
