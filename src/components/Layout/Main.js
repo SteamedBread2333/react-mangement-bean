@@ -3,12 +3,11 @@ import { observer, inject } from 'mobx-react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb, Icon, Tabs } from 'antd'
 import SiderMenu from './SiderMenu'
-import User from '../User/User'
+import SkillList from '../Skill/SkillList'
 import { getBreadInfo } from '../../utils'
 import styles from './Main.less'
 import { IntlProvider } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
-import Linechart from './Linechart'
 
 const { Header, Content, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -23,7 +22,7 @@ class Main extends Component {
       const nextPath = location.pathname
       const { tabBarList, addTab, activeTabChanged } = this.props.appStore
       if (tabBarList.find((item, index) => item.pathname === nextPath) === undefined && (type === 'PUSH' || type === 'POP')) {
-        if (prePath === '/' && nextPath === '/users') return
+        if (prePath === '/' && nextPath === '/skills') return
         addTab({ pathname: nextPath, active: true, title: getBreadInfo(nextPath).reverse()[0] })
       }
       if (tabBarList.find((item, index) => item.pathname === nextPath) !== undefined) {
@@ -104,9 +103,8 @@ class Main extends Component {
                 </Breadcrumb>
                 <div className={styles.content}>
                   <Switch>
-                    <Route exact path="/" component={User} />
-                    <Route path="/users" component={User} />
-                    <Route path="/area" component={() => <Linechart data={data}></Linechart>} />
+                    <Route exact path="/" component={SkillList} />
+                    <Route path="/skills" component={SkillList} />
                     <Route render={() => <h1 className={styles.noMatch}><FormattedMessage id='404_NOTFOUND'></FormattedMessage></h1>} />
                   </Switch>
                 </div>

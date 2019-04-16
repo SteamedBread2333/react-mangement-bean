@@ -15,7 +15,7 @@ class appStore {
   @observable collapsed
   @observable loading
   @observable tabBarList
-  @observable langType = zhCN
+  @observable langType = enUS
 
   constructor() {
     this.administratorInfo = {
@@ -26,7 +26,7 @@ class appStore {
     this.collapsed = false
     this.siderMode = 'inline'
     this.loading = false
-    this.tabBarList = [{ pathname: window.location.pathname === '/' ? '/users' : window.location.pathname, active: true, title: getBreadInfo(window.location.pathname).reverse()[0] }]
+    this.tabBarList = [{ pathname: window.location.pathname === '/' ? '/skills' : window.location.pathname, active: true, title: getBreadInfo(window.location.pathname).reverse()[0] }]
   }
 
   @action.bound addTab(tab) {

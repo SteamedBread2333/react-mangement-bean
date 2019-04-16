@@ -43,12 +43,13 @@ export const isEmptyObject = obj => {
  */
 export const getBreadInfo = (url) => {
   const breadConfig = {
-    '/users': ['数据管理', '用户数据'],
-    '/area': ['地区管理', '地区数据'],
+    '/skills': ['Skill Manage', 'Skill List'],
+    '/skillsEdit': ['Skill Manage', 'Skill Edit'],
+    '/skillsCreate': ['Skill Manage', 'Skill Create'],
   }
-  let breadInfo = breadConfig[Object.keys(breadConfig).find((item, index) => item === url)]
+  let breadInfo = breadConfig[Object.keys(breadConfig).find((item, index) => item.split('/')[1] === url.split('/')[1])]
   if (url === '/') {
-    breadInfo = breadConfig['/users']
+    breadInfo = breadConfig['/skills']
   }
   return breadInfo ? breadInfo : []
 }

@@ -29,17 +29,8 @@ class SiderMenu extends Component {
 
     let defaultSelectedKeys = ''
     switch (true) {
-      case ['/', '/users'].indexOf(location.pathname) !== -1:
-        defaultSelectedKeys = '/users'
-        break
-      case ['/hotel', '/hotel/edit'].indexOf(location.pathname) !== -1:
-        defaultSelectedKeys = '/'
-        break
-      case ['/net', '/net/edit'].indexOf(location.pathname) !== -1:
-        defaultSelectedKeys = '/'
-        break
-      case ['/area', '/area/edit'].indexOf(location.pathname) !== -1:
-        defaultSelectedKeys = '/area'
+      case ['/', '/skills'].indexOf(location.pathname) !== -1:
+        defaultSelectedKeys = '/skills'
         break
     }
 
@@ -50,29 +41,22 @@ class SiderMenu extends Component {
         <Sider
           theme='light'
           collapsible
-          style={{borderRight: '1px solid #efefef'}}
+          style={{ borderRight: '1px solid #efefef' }}
           collapsed={appStore.collapsed}
           onCollapse={appStore.onCollapse}
         >
           <div className={styles.logo} style={{ visibility: appStore.collapsed ? 'hidden' : 'visible' }}><FormattedMessage id='APP_NAME'></FormattedMessage></div>
           <Menu
             theme="light"
-            style={{border: 'none'}}
+            style={{ border: 'none' }}
             mode={appStore.siderMode}
             defaultSelectedKeys={[defaultSelectedKeys]}
             selectedKeys={[defaultSelectedKeys]}
             defaultOpenKeys={['data-mangment']}
             onClick={this.onSiderClick.bind(this)}
           >
-            <SubMenu
-              key="data-mangment"
-              title={<span><Icon type="user" /><span className="nav-text">数据管理</span></span>}
-            >
-              <Menu.Item key="/users">用户管理</Menu.Item>
-              <Menu.Item key="/hotel">酒店管理</Menu.Item>
-              <Menu.Item key="/net">网点管理</Menu.Item>
-              <Menu.Item key="/area">地区管理</Menu.Item>
-            </SubMenu>
+
+            <Menu.Item key="/skills">Skill Manage</Menu.Item>
           </Menu>
         </Sider>
       </IntlProvider>

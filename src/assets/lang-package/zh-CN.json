@@ -3,5 +3,11 @@
     "HELLO_WORLD": "你好 世界！",
     "LOG_OUT": "注销",
     "LANGUAGE": "语言",
-    "404_NOTFOUND": "找不到此页面"
+    "404_NOTFOUND": "找不到此页面",
+    "TABLE_TITLE_NAME":"名称",
+    "TABLE_TITLE_DESC":"描述",
+    "TABLE_TITLE_CONTRACTMODES":"告知方式",
+    "TABLE_TITLE_CT":"创建时间",
+    "TABLE_TITLE_OPERATE":"操作",
+    "CREATE":"新建"
 }

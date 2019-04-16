@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import {Link} from 'react-router-dom'
 import { Layout, Icon, Button, Table, DatePicker, Input } from 'antd'
-import OperationBar from '../../components/Layout/OperationBar.js'
+import OperationBar from '../Layout/OperationBar.js'
 import { FormattedMessage } from 'react-intl';
 import DerbyIcon from '../Common/DerbyIcon'
 
@@ -23,6 +24,13 @@ const columns = [
   {
     title: <FormattedMessage id='TABLE_TITLE_CT'></FormattedMessage>,
     dataIndex: 'created_time'
+  },
+  {
+    title: <FormattedMessage id='TABLE_TITLE_OPERATE'></FormattedMessage>,
+    dataIndex: 'id',
+    render: id => {
+      return <Link to={`/skillsEdit/${id}`} ><Icon type="edit"/></Link>
+    }
   }
 ]
 
@@ -42,7 +50,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 @inject('appStore') @observer
-class User extends Component {
+class SkillList extends Component {
 
   componentDidMount() {
     console.log(this.props.location)
@@ -71,6 +79,7 @@ class User extends Component {
           <Button type="primary" icon="rollback">重置</Button>
           <Button type="primary" icon="reload">刷新</Button>
         </OperationBar> */}
+        <Button type="primary" style={{width: 100, margin: '20px 0'}} onClick={() => {location.href = './#/skillsCreate'}}><FormattedMessage id='CREATE'></FormattedMessage></Button>
         <Content>
           <Table
             columns={columns}
@@ -83,4 +92,4 @@ class User extends Component {
   }
 }
 
-export default User
+export default SkillList
