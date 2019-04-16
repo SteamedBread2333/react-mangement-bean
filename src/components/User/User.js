@@ -9,23 +9,19 @@ const { Content } = Layout
 
 const columns = [
   {
-    title: 'ID',
-    dataIndex: 'id',
+    title: <FormattedMessage id='TABLE_TITLE_NAME'></FormattedMessage>,
+    dataIndex: 'name',
   },
   {
-    title: 'openId',
-    dataIndex: 'openId',
+    title: <FormattedMessage id='TABLE_TITLE_DESC'></FormattedMessage>,
+    dataIndex: 'desc',
   },
   {
-    title: '昵称',
-    dataIndex: 'nickname',
+    title: <FormattedMessage id='TABLE_TITLE_CONTRACTMODES'></FormattedMessage>,
+    dataIndex: 'contractModes',
   },
   {
-    title: '积分',
-    dataIndex: 'integral',
-  },
-  {
-    title: '创建时间',
+    title: <FormattedMessage id='TABLE_TITLE_CT'></FormattedMessage>,
     dataIndex: 'created_time'
   }
 ]
@@ -35,8 +31,11 @@ for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
     id: i,
+    desc: `getPwdOfRoomWifi${i}`,
+    name: `skill${i}`,
     openId: 'xxxx' + i,
     nickname: `老王${i}`,
+    contractModes: 'E-mail,SMS,Alexa',
     integral: i + 10,
     created_time: '2017-03-17'
   })
@@ -52,7 +51,7 @@ class User extends Component {
   render() {
     return (
       <Layout>
-        <OperationBar>
+        {/* <OperationBar>
           <DerbyIcon type="icon-tuichu" />
           <DatePicker
             showTime
@@ -71,7 +70,7 @@ class User extends Component {
           <Button type="primary" icon="search">搜索</Button>
           <Button type="primary" icon="rollback">重置</Button>
           <Button type="primary" icon="reload">刷新</Button>
-        </OperationBar>
+        </OperationBar> */}
         <Content>
           <Table
             columns={columns}
@@ -79,7 +78,6 @@ class User extends Component {
             bordered
           />
         </Content>
-        <FormattedMessage id='HELLO_WORLD'></FormattedMessage>
       </Layout>
     )
   }

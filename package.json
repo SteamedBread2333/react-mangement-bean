@@ -53,6 +53,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-intl": "^2.8.0",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "rimraf": "^2.6.3"
   }
 }
