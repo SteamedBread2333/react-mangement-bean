@@ -47,8 +47,11 @@ class SiderMenu extends Component {
           collapsed={appStore.collapsed}
           onCollapse={appStore.onCollapse}
         >
-          <img src={logo} alt='logo' style={{ width: '100%', padding: '0 20px', marginTop: 30 }} />
-          <div className={styles.logo} style={{ visibility: appStore.collapsed ? 'hidden' : 'visible' }}><FormattedMessage id='APP_NAME'></FormattedMessage></div>
+          <div className={styles.logo} style={{ visibility: appStore.collapsed ? 'hidden' : 'visible' }}>
+            <img src={logo} alt='logo' style={{ width: 170, marginBottom: 15 }} />
+            <FormattedMessage id='APP_NAME'></FormattedMessage>
+          </div>
+          <h4 className={styles.separator}></h4>
           <Menu
             theme="dark"
             style={{ border: 'none' }}
