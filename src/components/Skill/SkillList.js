@@ -53,7 +53,7 @@ for (let i = 0; i < 100; i++) {
 class SkillList extends Component {
 
   componentDidMount() {
-    console.log(this.props.location)
+    // console.log(this.props.location)
   }
 
   render() {

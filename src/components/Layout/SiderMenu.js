@@ -29,7 +29,7 @@ class SiderMenu extends Component {
     const { appStore, location } = this.props
 
     let defaultSelectedKeys = ''
-    console.log(location)
+    // console.log(location)
     switch (true) {
       case location.pathname === '/':
         defaultSelectedKeys = '/skills'
@@ -67,7 +67,7 @@ class SiderMenu extends Component {
             onClick={this.onSiderClick.bind(this)}
           >
 
-            <Menu.Item className={`${styles.menuItem} ${styles.menuItemTextColor}`} key="/skills">Skill Manage</Menu.Item>
+            <Menu.Item className={styles.menuItemTextColor} key="/skills">Skill Manage</Menu.Item>
             {/* <Menu.Item className={`${styles.menuItem} ${styles.menuItemTextColor}`} key="/lalal">Skill Manage</Menu.Item> */}
           </Menu>
         </Sider>
