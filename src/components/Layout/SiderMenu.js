@@ -6,6 +6,7 @@ import { breadConfig } from '../../utils'
 import styles from './SiderMenu.less'
 import { IntlProvider } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
+import { logo } from '../../assets'
 
 
 
@@ -36,18 +37,20 @@ class SiderMenu extends Component {
 
     const { langType } = this.props.appStore
 
+    console.log(logo)
     return (
       <IntlProvider locale="en" messages={langType}>
         <Sider
           theme='light'
           collapsible
-          style={{ borderRight: '1px solid #efefef' }}
+          style={{ borderRight: '1px solid #efefef', background: '#06789d' }}
           collapsed={appStore.collapsed}
           onCollapse={appStore.onCollapse}
         >
+          <img src={logo} alt='logo' style={{ width: '100%', padding: '0 20px', marginTop: 30 }} />
           <div className={styles.logo} style={{ visibility: appStore.collapsed ? 'hidden' : 'visible' }}><FormattedMessage id='APP_NAME'></FormattedMessage></div>
           <Menu
-            theme="light"
+            theme="dark"
             style={{ border: 'none' }}
             mode={appStore.siderMode}
             defaultSelectedKeys={[defaultSelectedKeys]}
@@ -56,7 +59,7 @@ class SiderMenu extends Component {
             onClick={this.onSiderClick.bind(this)}
           >
 
-            <Menu.Item key="/skills">Skill Manage</Menu.Item>
+            <Menu.Item className={styles.menuItem} key="/skills">Skill Manage</Menu.Item>
           </Menu>
         </Sider>
       </IntlProvider>
