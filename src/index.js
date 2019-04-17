@@ -13,8 +13,6 @@ import appStore from './stores/appStore'
 
 const stores = { appStore }
 
-useStrict(true)
-
 if (module.hot) {
   module.hot.accept();
 }

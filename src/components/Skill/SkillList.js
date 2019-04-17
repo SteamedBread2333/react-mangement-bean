@@ -12,11 +12,11 @@ const { Content } = Layout
 const columns = [
   {
     title: <FormattedMessage id='TABLE_TITLE_NAME'></FormattedMessage>,
-    dataIndex: 'name',
+    dataIndex: 'skill',
   },
   {
     title: <FormattedMessage id='TABLE_TITLE_DESC'></FormattedMessage>,
-    dataIndex: 'desc',
+    dataIndex: 'skill',
   },
   {
     title: <FormattedMessage id='TABLE_TITLE_CONTRACTMODES'></FormattedMessage>,
@@ -35,21 +35,6 @@ const columns = [
   }
 ]
 
-const data = [];
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key: i,
-    id: i,
-    desc: `getPwdOfRoomWifi${i}`,
-    name: `skill${i}`,
-    openId: 'xxxx' + i,
-    nickname: `老王${i}`,
-    contractModes: 'E-mail,SMS,Alexa',
-    integral: i + 10,
-    created_time: '2017-03-17'
-  })
-}
-
 @inject('appStore') @observer
 class SkillList extends Component {
 
@@ -59,6 +44,9 @@ class SkillList extends Component {
   }
 
   render() {
+
+    const {skills} = store
+
     return (
       <Layout>
         {/* <OperationBar>
@@ -85,7 +73,7 @@ class SkillList extends Component {
         <Content>
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={skills}
             bordered
           />
         </Content>

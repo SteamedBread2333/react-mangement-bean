@@ -4,17 +4,17 @@ import {message} from 'antd'
 
 class SkillStore {
 
-    @observable skills = []
+    @observable skills = null
 
     constructor(service) {
         this.service = service
     }
 
     @action getSkills(userId) {
-        this.service.fetchSkills(userId).then(res => {
-            console.log(res)
-            message.success('success')
-        }).catch(() => {
+        return this.service.fetchSkills(userId).then(res => {
+            this.skills = res.data
+        }).catch(err => {
+            console.log(err)
             message.error('error')
         })
     }

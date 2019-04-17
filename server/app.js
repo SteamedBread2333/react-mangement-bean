@@ -2,15 +2,26 @@ import Koa from 'koa'
 import webpack from 'webpack'
 import webpackConfig from '../webpack.config'
 import { devMiddleware, hotMiddleware } from 'koa-webpack-middleware'
+import httpProxy from 'http-proxy-middleware'
 import path from 'path'
 import Router from 'koa-router'
+import k2c from 'koa2-connect'
 import bodyParser from 'koa-bodyparser'
 
 const router = new Router()
 const app = new Koa()
 const compile = webpack(webpackConfig)
 
-app.use(bodyParser())
+app.use(async (ctx, next) => {
+	if (ctx.url.startsWith('/AlexaService/v1/')) { //匹配有api字段的请求url
+		ctx.respond = false // 绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response        
+		await k2c(httpProxy({ target: 'http://10.200.3.121/', changeOrigin: true, secure: false, }))(ctx, next);
+	} await next()
+})
+
+app.use(bodyParser({
+	enableTypes: ['json', 'form', 'text']
+}))
 
 app.use(devMiddleware(compile, {
 	noInfo: true,
@@ -30,6 +41,7 @@ app.use(hotMiddleware(compile, {
 	// path: '/__webpack_hmr',
 	// heartbeat: 10 * 1000
 }))
+
 
 //模拟登录接口
 router.post('/login', async (ctx, next) => {

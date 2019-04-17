@@ -4,15 +4,15 @@ const autoprefixer = require('autoprefixer')
 const themeConfig = require('./src/theme')
 
 module.exports = {
-  devServer: {
-    proxy: {
-      '/AlexaService/v1': {
-        target: 'http://10.200.3.121',
-        changeOrigin: true,     // target是域名的话，需要这个参数，
-        // secure: false,          // 设置支持https协议的代理
-      },
-    }
-  },
+  // devServer: {
+  //   proxy: {
+  //     '/AlexaService/v1': {
+  //       target: 'http://10.200.3.121',
+  //       changeOrigin: true,     // target是域名的话，需要这个参数，
+  //       // secure: false,          // 设置支持https协议的代理
+  //     },
+  //   }
+  // },
   entry: [
     'webpack-hot-middleware/client',//当发生热更新时控制台会有提示,生成的bundle.js存储在内存中
     './src/index.js'//入口文件
