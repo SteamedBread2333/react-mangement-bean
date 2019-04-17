@@ -29,15 +29,20 @@ class SiderMenu extends Component {
     const { appStore, location } = this.props
 
     let defaultSelectedKeys = ''
+    console.log(location)
     switch (true) {
-      case ['/', '/skills'].indexOf(location.pathname) !== -1:
+      case location.pathname === '/':
         defaultSelectedKeys = '/skills'
+        break
+      case location.pathname.search('/skills') !== -1:
+        defaultSelectedKeys = '/skills'
+        break
+      case location.pathname.search('/lalal') !== -1:
+        defaultSelectedKeys = '/lalal'
         break
     }
 
     const { langType } = this.props.appStore
-
-    console.log(logo)
     return (
       <IntlProvider locale="en" messages={langType}>
         <Sider
@@ -54,7 +59,7 @@ class SiderMenu extends Component {
           <h4 className={styles.separator}></h4>
           <Menu
             theme="dark"
-            style={{ border: 'none' }}
+            style={{ border: 'none', background: '#06789d' }}
             mode={appStore.siderMode}
             defaultSelectedKeys={[defaultSelectedKeys]}
             selectedKeys={[defaultSelectedKeys]}
@@ -62,7 +67,8 @@ class SiderMenu extends Component {
             onClick={this.onSiderClick.bind(this)}
           >
 
-            <Menu.Item className={styles.menuItem} key="/skills">Skill Manage</Menu.Item>
+            <Menu.Item className={`${styles.menuItem} ${styles.menuItemTextColor}`} key="/skills">Skill Manage</Menu.Item>
+            {/* <Menu.Item className={`${styles.menuItem} ${styles.menuItemTextColor}`} key="/lalal">Skill Manage</Menu.Item> */}
           </Menu>
         </Sider>
       </IntlProvider>
