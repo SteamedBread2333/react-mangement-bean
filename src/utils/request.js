@@ -13,7 +13,7 @@ axios.interceptors.request.use(
     if (config.method === 'post' && config.data) {
       config.data = qs.stringify(config.data)
     }
-    //config.withCredentials = true  // 需要跨域打开此配置
+    config.withCredentials = true  // 需要跨域打开此配置
     appStore.showLoading()
     return config
   },

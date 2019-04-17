@@ -39,7 +39,8 @@
     "postcss-pxtorem": "^4.0.0",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
-    "webpack": "^2.4.1"
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
     "antd": "^3.16.2",

@@ -60,20 +60,22 @@ class Main extends Component {
 
             <SiderMenu store={this.props.appStore} />
             <Layout>
-              <Header className={styles.header}>
-                <Menu mode="horizontal" onClick={handleHeaderChick}>
-                  <SubMenu
-                    title={administratorInfo.name}
-                  >
-                    <Menu.Item key="logout"><FormattedMessage id='LOG_OUT'></FormattedMessage></Menu.Item>
-                  </SubMenu>
+              <Header className={styles.header} style={{ borderBottom: '1px solid #efefef', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ cursor: 'pointer', marginLeft: 15, lineHeight: '45px' }} onClick={() => { history.back(-1) }}><Icon type="left" />&nbsp;&nbsp;&nbsp;Back</div>
+                <Menu style={{ border: 'none', lineHeight: '45px', flexDirection: 'row' }} mode="horizontal" onClick={handleHeaderChick}>
                   <SubMenu
                     title={<FormattedMessage id='LANGUAGE'></FormattedMessage>}
                   >
                     <Menu.Item value='ch' key="ch">中文</Menu.Item>
                     <Menu.Item value='en' key="en">English</Menu.Item>
                   </SubMenu>
+                  <SubMenu
+                    title={administratorInfo.name}
+                  >
+                    <Menu.Item key="logout"><FormattedMessage id='LOG_OUT'></FormattedMessage></Menu.Item>
+                  </SubMenu>
                 </Menu>
+
               </Header>
               {/* <Tabs hideAdd type="editable-card" activeKey={activeTab.pathname} onChange={this.onTabChange.bind(this)} onEdit={this.onTabEdit.bind(this)}>
               {

@@ -78,4 +78,5 @@ router.get('*', async (ctx, next) => {
 app.use(router.routes()).use(router.allowedMethods())
 
 app.listen(8080)
+// console.log(webpackConfig);
 console.log('app started at port 8080...')

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import {Link} from 'react-router-dom'
-import { Layout, Icon, Button, Table, DatePicker, Input } from 'antd'
+import { Layout, Icon, Button, Table } from 'antd'
 import OperationBar from '../Layout/OperationBar.js'
 import { FormattedMessage } from 'react-intl';
 import DerbyIcon from '../Common/DerbyIcon'
+import store from '../../stores/skillStore'
 
 const { Content } = Layout
 
@@ -54,6 +55,7 @@ class SkillList extends Component {
 
   componentDidMount() {
     // console.log(this.props.location)
+    store.getSkills(1);
   }
 
   render() {
