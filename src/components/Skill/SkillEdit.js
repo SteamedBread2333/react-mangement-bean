@@ -34,7 +34,7 @@ const lineStyle = {
 
 const formItemLayout = {
     labelCol: { span: 5 },
-    wrapperCol: { span: 8 },
+    wrapperCol: { span: 8 }
 };
 
 function hasErrors(fieldsError) {
