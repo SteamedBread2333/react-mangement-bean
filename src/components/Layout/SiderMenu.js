@@ -46,9 +46,9 @@ class SiderMenu extends Component {
     return (
       <IntlProvider locale="en" messages={langType}>
         <Sider
-          theme='light'
+          theme='dark'
           collapsible
-          style={{ borderRight: '1px solid #efefef', background: '#06789d' }}
+          className={styles.silder}
           collapsed={appStore.collapsed}
           onCollapse={appStore.onCollapse}
         >
@@ -61,13 +61,15 @@ class SiderMenu extends Component {
             theme="dark"
             style={{ border: 'none', background: '#06789d' }}
             mode={appStore.siderMode}
+            inlineCollapsed={appStore.collapsed}
+            inlineIndent={20}
             defaultSelectedKeys={[defaultSelectedKeys]}
             selectedKeys={[defaultSelectedKeys]}
             defaultOpenKeys={['data-mangment']}
             onClick={this.onSiderClick.bind(this)}
           >
 
-            <Menu.Item className={styles.menuItemTextColor} key="/skills">Skill Manage</Menu.Item>
+            <Menu.Item className={styles.menuItemTextColor} key="/skills"><Icon type="setting" /><span>Skills</span></Menu.Item>
             {/* <Menu.Item className={`${styles.menuItem} ${styles.menuItemTextColor}`} key="/lalal">Skill Manage</Menu.Item> */}
           </Menu>
         </Sider>

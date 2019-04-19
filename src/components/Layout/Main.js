@@ -3,11 +3,15 @@ import { observer, inject } from 'mobx-react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb, Icon, Tabs } from 'antd'
 import SiderMenu from './SiderMenu'
-import SkillList from '../Skill/SkillList'
 import { getBreadInfo } from '../../utils'
 import styles from './Main.less'
 import { IntlProvider } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
+
+// page
+import SkillList from '../Skill/SkillList'
+import SkillCreate from '../Skill/SkillCreate'
+import SkillEdit from '../Skill/SkillEdit'
 
 const { Header, Content, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -107,6 +111,8 @@ class Main extends Component {
                   <Switch>
                     <Route exact path="/" component={SkillList} />
                     <Route path="/skills" component={SkillList} />
+                    <Route path="/skillsCreate" component={SkillCreate} />
+                    <Route path="/skillsEdit/:id" component={SkillEdit} />
                     <Route render={() => <h1 className={styles.noMatch}><FormattedMessage id='404_NOTFOUND'></FormattedMessage></h1>} />
                   </Switch>
                 </div>

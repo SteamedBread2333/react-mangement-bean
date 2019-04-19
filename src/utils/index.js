@@ -43,9 +43,9 @@ export const isEmptyObject = obj => {
  */
 export const getBreadInfo = (url) => {
   const breadConfig = {
-    '/skills': ['Skill Manage', 'Skill List'],
-    '/skillsEdit': ['Skill Manage', 'Skill Edit'],
-    '/skillsCreate': ['Skill Manage', 'Skill Create'],
+    '/skills': ['Skills', 'Skill List'],
+    '/skillsEdit': ['Skills', 'Skill Edit'],
+    '/skillsCreate': ['Skills', 'Skill Create'],
   }
   let breadInfo = breadConfig[Object.keys(breadConfig).find((item, index) => item.split('/')[1] === url.split('/')[1])]
   if (url === '/') {

@@ -1,51 +1,84 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Layout, Icon, Button, Table } from 'antd'
-import OperationBar from '../Layout/OperationBar.js'
+// import OperationBar from '../Layout/OperationBar.js'
 import { FormattedMessage } from 'react-intl';
-import DerbyIcon from '../Common/DerbyIcon'
-import store from '../../stores/skillStore'
+// import DerbyIcon from '../Common/DerbyIcon'
+import moment from 'moment'
 
 const { Content } = Layout
 
 const columns = [
   {
     title: <FormattedMessage id='TABLE_TITLE_NAME'></FormattedMessage>,
-    dataIndex: 'skill',
+    key: 'name',
+    align: 'center',
+    render: data => data.skill.name
   },
   {
     title: <FormattedMessage id='TABLE_TITLE_DESC'></FormattedMessage>,
-    dataIndex: 'skill',
+    key: 'desc',
+    align: 'center',
+    render: data => data.skill.description || '--'
   },
   {
-    title: <FormattedMessage id='TABLE_TITLE_CONTRACTMODES'></FormattedMessage>,
-    dataIndex: 'contractModes',
+    title: <FormattedMessage id='TABLE_TITLE_CONTENT'></FormattedMessage>,
+    key: 'content',
+    children: [{
+      title: <FormattedMessage id='TABLE_TITLE_KEY'></FormattedMessage>,
+      key: 'contentName',
+      align: 'center',
+      render: data => data.content.name
+    }, {
+      title: <FormattedMessage id='TABLE_TITLE_VALUE'></FormattedMessage>,
+      key: 'contentValue',
+      align: 'center',
+      render: data => data.content.text
+    }]
+  },
+  {
+    title: <FormattedMessage id='TABLE_TITLE_CONTACTMODES'></FormattedMessage>,
+    key: 'contactModes',
+    children: [{
+      title: <FormattedMessage id='TABLE_TITLE_EMAIL'></FormattedMessage>,
+      key: 'email',
+      align: 'center',
+      render: data => data.contacts.email
+    }, {
+      title: <FormattedMessage id='TABLE_TITLE_SMS'></FormattedMessage>,
+      key: 'sms',
+      align: 'center',
+      render: data => data.contacts.phoneNumber
+    }]
   },
   {
     title: <FormattedMessage id='TABLE_TITLE_CT'></FormattedMessage>,
-    dataIndex: 'created_time'
+    key: 'createdTime',
+    align: 'center',
+    render: data => moment(data.skill.createTime).format('YYYY-MM-DD')
   },
   {
     title: <FormattedMessage id='TABLE_TITLE_OPERATE'></FormattedMessage>,
-    dataIndex: 'id',
-    render: id => {
-      return <Link to={`/skillsEdit/${id}`} ><Icon type="edit"/></Link>
+    key: 'id',
+    align: 'center',
+    render: data => {
+      return <Link to={`/skillsEdit/${data.skill.id}`} ><Icon type="edit" /></Link>
     }
   }
 ]
 
-@inject('appStore') @observer
+@inject('skillStore') @observer
 class SkillList extends Component {
 
   componentDidMount() {
     // console.log(this.props.location)
-    store.getSkills(1);
+    this.props.skillStore.getSkills(1);
   }
 
   render() {
 
-    const {skills} = store
+    const { skillsList, loading } = this.props.skillStore
 
     return (
       <Layout>
@@ -69,11 +102,13 @@ class SkillList extends Component {
           <Button type="primary" icon="rollback">重置</Button>
           <Button type="primary" icon="reload">刷新</Button>
         </OperationBar> */}
-        <Button type="primary" style={{width: 100, margin: '20px 0'}} onClick={() => {location.href = './#/skillsCreate'}}><FormattedMessage id='CREATE'></FormattedMessage></Button>
+        <Button type="primary" style={{ width: 100, margin: '20px 0' }} onClick={() => { location.href = './#/skillsCreate' }}><FormattedMessage id='CREATE'></FormattedMessage></Button>
         <Content>
           <Table
+            rowKey={data => data.skill.id}
             columns={columns}
-            dataSource={skills}
+            dataSource={skillsList ? skillsList.data : []}
+            loading={loading}
             bordered
           />
         </Content>

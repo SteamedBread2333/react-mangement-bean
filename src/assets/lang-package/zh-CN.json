@@ -5,9 +5,23 @@
     "LANGUAGE": "语言",
     "404_NOTFOUND": "找不到此页面",
     "TABLE_TITLE_NAME":"名称",
+    "TABLE_TITLE_KEY":"键",
+    "TABLE_TITLE_VALUE":"值",
     "TABLE_TITLE_DESC":"描述",
-    "TABLE_TITLE_CONTRACTMODES":"告知方式",
+    "TABLE_TITLE_CONTACTMODES":"告知方式",
     "TABLE_TITLE_CT":"创建时间",
     "TABLE_TITLE_OPERATE":"操作",
-    "CREATE":"新建"
+    "TABLE_TITLE_CONTENT":"内容",
+    "TABLE_TITLE_EMAIL":"邮箱",
+    "TABLE_TITLE_SMS":"电话号码",
+
+    "CREATE":"新建",
+    "SAVE":"保存",
+    "CANCEL":"取消",
+    "CREATE_SKILL_TITLE1":"基本属性设置",
+    "CREATE_SKILL_DESC1":"设置Alexa Skill的基本属性，必填",
+    "CREATE_SKILL_TITLE2":"内容设置",
+    "CREATE_SKILL_DESC2":"设置Alexa Skill的具体内容",
+    "CREATE_SKILL_TITLE3":"触达方式设置",
+    "CREATE_SKILL_DESC3":"设置Alexa Skill的触达方式"
 }

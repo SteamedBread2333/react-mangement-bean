@@ -1,21 +1,55 @@
 import skillService from '../services/skillService'
-import {observable, computed, action} from 'mobx';
-import {message} from 'antd'
+import { observable, computed, action, toJS } from 'mobx';
+import { message } from 'antd'
 
 class SkillStore {
 
-    @observable skills = null
+    @observable _skillsList = null
+    @observable loading = false
+
+    @computed get skillsList() {
+        return this._skillsList ? toJS(this._skillsList) : {};
+    }
 
     constructor(service) {
         this.service = service
     }
 
     @action getSkills(userId) {
-        return this.service.fetchSkills(userId).then(res => {
-            this.skills = res.data
+        this.loading = true
+        this.service.fetchSkills(userId).then(res => {
+            this._skillsList = res
         }).catch(err => {
-            console.log(err)
             message.error('error')
+        }).finally(() => {
+            this.loading = false
+        })
+    }
+
+    @action getSkill(skillId) {
+        return this.service.fetchSkill(skillId)
+    }
+
+    @action addSkill(params) {
+        this.loading = true
+        this.service.createSkill(params).then(res => {
+            message.success('Success')
+            location.href = `./#/skills`
+        }).catch(err => {
+            message.error('Net Error')
+        }).finally(() => {
+            this.loading = false
+        })
+    }
+
+    @action updateSkill(params) {
+        this.loading = true
+        this.service.updateSkill(params).then(res => {
+            message.success('Success')
+        }).catch(err => {
+            message.error('Net Error')
+        }).finally(() => {
+            this.loading = false
         })
     }
 

@@ -5,9 +5,23 @@
     "LANGUAGE": "Language",
     "404_NOTFOUND": "404 not found",
     "TABLE_TITLE_NAME":"Name",
+    "TABLE_TITLE_KEY":"Key",
+    "TABLE_TITLE_VALUE":"Value",
     "TABLE_TITLE_DESC":"Description",
-    "TABLE_TITLE_CONTRACTMODES":"Announcers",
+    "TABLE_TITLE_CONTACTMODES":"Announcers",
     "TABLE_TITLE_CT":"Create Time",
-    "TABLE_TITLE_OPERATE":"Operate",
-    "CREATE":"Create"
+    "TABLE_TITLE_OPERATE":"Operation",
+    "TABLE_TITLE_CONTENT":"Content",
+    "TABLE_TITLE_EMAIL":"E-mail",
+    "TABLE_TITLE_SMS":"Phone Number",
+
+    "CREATE":"Create",
+    "SAVE":"Save",
+    "CANCEL":"Cancel",
+    "CREATE_SKILL_TITLE1":"Basic Set",
+    "CREATE_SKILL_DESC1":"Set Basic Info of Alexa skill and it's required",
+    "CREATE_SKILL_TITLE2":"Content Set",
+    "CREATE_SKILL_DESC2":"Set Content Info of Alexa skill that someone like WIFI",
+    "CREATE_SKILL_TITLE3":"Contact Set",
+    "CREATE_SKILL_DESC3":"Set Announcers of Alexa skill that someone like E-mail or Phone Number"
 }

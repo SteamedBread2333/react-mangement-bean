@@ -10,8 +10,9 @@ import { HashRouter as Router } from 'react-router-dom'
 import App from './components/App'
 
 import appStore from './stores/appStore'
+import skillStore from './stores/skillStore'
 
-const stores = { appStore }
+const stores = { appStore, skillStore }
 
 if (module.hot) {
   module.hot.accept();
