@@ -46,6 +46,7 @@ class SkillStore {
         this.loading = true
         this.service.updateSkill(params).then(res => {
             message.success('Success')
+            location.href = `./#/skills`
         }).catch(err => {
             message.error('Net Error')
         }).finally(() => {
