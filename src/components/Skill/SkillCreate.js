@@ -55,7 +55,7 @@ class CreateForm extends Component {
                     name: values.contentName,
                     text: values.contentValue
                 },
-                contact: {
+                contacts: {
                     email: values.email,
                     phoneNumber: values.phoneNumber
                 }

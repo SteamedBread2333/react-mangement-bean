@@ -3,7 +3,7 @@ import qs from 'qs'
 import { API_PATH } from '../constants'
 import appStore from '../stores/appStore'
 
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 10000
 axios.defaults.baseURL = API_PATH
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
@@ -26,6 +26,10 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     appStore.hideLoading()
+    //todo:业务报错由此返回，在此做异常判断
+    if(response.data.code !== 2000){
+      return Promise.reject(response.data)
+    }
     return response.data
   },
   error => {

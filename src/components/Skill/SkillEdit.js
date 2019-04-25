@@ -45,17 +45,34 @@ function hasErrors(fieldsError) {
 class EditForm extends Component {
 
     @observable params = null
+    @observable skillId = null
+    @observable contentId = null
+    @observable contractsId = null
 
     componentDidMount() {
         this.props.skillStore.loading = true
-        this.props.skillStore.getSkill(this.props.skillId).then(({ data } = res) => {
-            this.params = data
+        this.props.skillStore.getSkill(this.props.skillId).then(res => {
+            let data = res.data || {}
+            data.skill = data.skill || {}
+            data.content = data.content || {}
+            data.contacts = data.contacts || {}
+            this.skillId = data.skill.id
+            this.contentId = data.content ? data.content.id : null
+            this.contractsId = data.contracts ? data.contracts.id : null
+            const defaultValues = {
+                name: data.skill.name,
+                description: data.skill.description,
+                contentName: data.content.name,
+                contentValue: data.content.text,
+                email: data.contacts.email,
+                phoneNumber: data.contacts.phoneNumber,
+            }
             this.props.form.setFieldsValue({
-                ...this.params
+                ...defaultValues
             })
             this.props.form.validateFields()
         }).catch(err => {
-            message.error('error')
+            message.error(err.message)
         }).finally(() => {
             this.props.skillStore.loading = false
         })
@@ -64,6 +81,7 @@ class EditForm extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
+            this.params = {}
             this.params.skill = {
                 name: values.name,
                 description: values.description
@@ -72,9 +90,18 @@ class EditForm extends Component {
                 name: values.contentName,
                 text: values.contentValue
             }
-            this.params.contact = {
+            this.params.contacts = {
                 email: values.email,
                 phoneNumber: values.phoneNumber
+            }
+            if (this.skillId){
+                this.params.skill.id = this.skillId
+            }
+            if (this.contentId){
+                this.params.content.id = this.contentId
+            }
+            if (this.contractsId){
+                this.params.contacts.id = this.contractsId
             }
             if (!err) {
                 this.props.skillStore.updateSkill(this.params)

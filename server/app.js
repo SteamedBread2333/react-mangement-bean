@@ -15,7 +15,7 @@ const compile = webpack(webpackConfig)
 app.use(async (ctx, next) => {
 	if (ctx.url.startsWith('/AlexaService/v1/')) { //匹配有api字段的请求url
 		ctx.respond = false // 绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response        
-		await k2c(httpProxy({ target: 'http://10.200.3.121/', changeOrigin: true, secure: false, }))(ctx, next);
+		await k2c(httpProxy({ target: 'http://10.200.3.121/', changeOrigin: true, secure: false, proxyTimeout: 10000 }))(ctx, next);
 	} await next()
 })
 

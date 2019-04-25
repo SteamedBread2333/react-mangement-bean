@@ -29,12 +29,12 @@ const columns = [
       title: <FormattedMessage id='TABLE_TITLE_KEY'></FormattedMessage>,
       key: 'contentName',
       align: 'center',
-      render: data => data.content.name
+      render: data => data.content ? data.content.name : '--'
     }, {
       title: <FormattedMessage id='TABLE_TITLE_VALUE'></FormattedMessage>,
       key: 'contentValue',
       align: 'center',
-      render: data => data.content.text
+      render: data => data.content ? data.content.text : '--'
     }]
   },
   {
@@ -44,19 +44,19 @@ const columns = [
       title: <FormattedMessage id='TABLE_TITLE_EMAIL'></FormattedMessage>,
       key: 'email',
       align: 'center',
-      render: data => data.contacts.email
+      render: data => data.contacts ? data.contacts.email : '--'
     }, {
       title: <FormattedMessage id='TABLE_TITLE_SMS'></FormattedMessage>,
       key: 'sms',
       align: 'center',
-      render: data => data.contacts.phoneNumber
+      render: data => data.contacts ? data.contacts.phoneNumber : '--'
     }]
   },
   {
     title: <FormattedMessage id='TABLE_TITLE_CT'></FormattedMessage>,
     key: 'createdTime',
     align: 'center',
-    render: data => moment(data.skill.createTime).format('YYYY-MM-DD')
+    render: data => data.skill.createTime ? moment(data.skill.createTime).format('YYYY-MM-DD') : '--'
   },
   {
     title: <FormattedMessage id='TABLE_TITLE_OPERATE'></FormattedMessage>,

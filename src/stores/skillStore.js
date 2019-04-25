@@ -20,7 +20,7 @@ class SkillStore {
         this.service.fetchSkills(userId).then(res => {
             this._skillsList = res
         }).catch(err => {
-            message.error('error')
+            message.error(err.message)
         }).finally(() => {
             this.loading = false
         })
@@ -36,7 +36,7 @@ class SkillStore {
             message.success('Success')
             location.href = `./#/skills`
         }).catch(err => {
-            message.error('Net Error')
+            message.error(err.message)
         }).finally(() => {
             this.loading = false
         })
@@ -48,7 +48,7 @@ class SkillStore {
             message.success('Success')
             location.href = `./#/skills`
         }).catch(err => {
-            message.error('Net Error')
+            message.error(err.message)
         }).finally(() => {
             this.loading = false
         })

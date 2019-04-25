@@ -7,7 +7,7 @@ export default {
         return request.get(`${config.BASE_URL}/skill/user/${userId}`)
     },
     fetchSkill(skillId = 1) {
-        return request.get(`${config.BASE_URL}/skill/${skillId}`)
+        return request.get(`${config.BASE_URL}/scc/${skillId}`)
     },
     createSkill(params){
         return request.post(`${config.BASE_URL}/skill/add`, params)
