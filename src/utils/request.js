@@ -3,7 +3,7 @@ import qs from 'qs'
 import { API_PATH } from '../constants'
 import appStore from '../stores/appStore'
 
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 20000
 axios.defaults.baseURL = API_PATH
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 

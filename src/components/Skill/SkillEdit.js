@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react'
 import { observable } from 'mobx';
 import { Layout, Spin, Button, Form, Input, message } from 'antd'
 import { FormattedMessage } from 'react-intl';
+import { is, fromJS } from 'immutable';
 
 const FormItem = Form.Item
 
@@ -78,6 +79,10 @@ class EditForm extends Component {
         })
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -94,13 +99,13 @@ class EditForm extends Component {
                 email: values.email,
                 phoneNumber: values.phoneNumber
             }
-            if (this.skillId){
+            if (this.skillId) {
                 this.params.skill.id = this.skillId
             }
-            if (this.contentId){
+            if (this.contentId) {
                 this.params.content.id = this.contentId
             }
-            if (this.contractsId){
+            if (this.contractsId) {
                 this.params.contacts.id = this.contractsId
             }
             if (!err) {

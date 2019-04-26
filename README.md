@@ -18,6 +18,6 @@
 ### [mobx-react](https://github.com/mobxjs/mobx-react)
 ### [antd-design](https://ant.design/docs/react/introduce-cn)
 ### [axios](https://github.com/mzabriskie/axios)
-### [EChats(图标)](https://echarts.baidu.com/)
+### [EChats(图表)](https://echarts.baidu.com/)
 ### [react-intl(国际化)](https://www.npmjs.com/package/react-intl)
 ### [immutable(性能优化)](https://www.jianshu.com/p/0fa8c7456c15)
