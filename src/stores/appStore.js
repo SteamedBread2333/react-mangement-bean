@@ -74,19 +74,22 @@ class appStore {
   }
 
   @action loginSubmit = async values => {
-    try {
-      const data = await login(values)
-      runInAction(() => {
-        this.isLogin = true
-      })
-    }
-    catch (error) {
-      console.log(error)
-    }
+    // try {
+    //   const data = await login(values)
+    //   runInAction(() => {
+    //     this.isLogin = true
+    //   })
+    // }
+    // catch (error) {
+    //   console.log(error)
+    // }
+    this.isLogin = true
+    location.href = './#/'
   }
 
   @action.bound logout() {
     this.isLogin = false
+    location.href = './login.html'
   }
 
   @action showLoading() {

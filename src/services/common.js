@@ -1,3 +1,3 @@
-const config = { BASE_URL: '/AlexaService/v1' }
+const config = { BASE_URL: '/alexaservice/v1' }
 
 export default config

@@ -32,12 +32,12 @@ class Login extends Component {
               rules: [
                 {
                   required: true,
-                  message: '请填写用户名'
+                  message: 'Please input Account'
                 }
               ]
             })(<Input
               size='large'
-              placeholder='用户名'
+              placeholder='Account'
               onPressEnter={this.validate.bind(this)}
             />)}
           </FormItem>
@@ -46,13 +46,13 @@ class Login extends Component {
               rules: [
                 {
                   required: true,
-                  message: '请填写密码'
+                  message: 'Please input Password'
                 }
               ]
             })(<Input
               size='large'
               type='password'
-              placeholder='密码'
+              placeholder='Password'
               onPressEnter={this.validate.bind(this)}
             />)}
           </FormItem>

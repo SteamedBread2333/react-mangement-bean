@@ -9,9 +9,14 @@ import { IntlProvider } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 
 // page
+import PropertyProfile from '../PropertyProfile'
+
 import SkillList from '../Skill/SkillList'
 import SkillCreate from '../Skill/SkillCreate'
 import SkillEdit from '../Skill/SkillEdit'
+
+// demoPage
+import Demo from '../Demo/Demo'
 
 const { Header, Content, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -64,9 +69,9 @@ class Main extends Component {
 
             <SiderMenu store={this.props.appStore} />
             <Layout>
-              <Header className={styles.header} style={{ borderBottom: '1px solid #efefef', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ cursor: 'pointer', marginLeft: 15, lineHeight: '45px' }} onClick={() => { history.back(-1) }}><Icon type="left" />&nbsp;&nbsp;&nbsp;Back</div>
-                <Menu style={{ border: 'none', lineHeight: '45px', flexDirection: 'row' }} mode="horizontal" onClick={handleHeaderChick}>
+              <Header className={styles.header}>
+                <div onClick={() => { history.back(-1) }}><Icon type="left" />&nbsp;&nbsp;&nbsp;Back</div>
+                <Menu mode="horizontal" onClick={handleHeaderChick}>
                   <SubMenu
                     title={<FormattedMessage id='LANGUAGE'></FormattedMessage>}
                   >
@@ -103,16 +108,18 @@ class Main extends Component {
                 })
               }
             </Tabs> */}
-              <Content style={{ margin: '0 16px' }} className={styles.contentWrapper}>
-                <Breadcrumb style={{ margin: '12px 0' }}>
+              <Content className={styles.contentWrapper}>
+                <Breadcrumb className={styles.breadcrumb}>
                   {getBreadInfo(this.props.location.pathname).map((item, index) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)}
                 </Breadcrumb>
                 <div className={styles.content}>
                   <Switch>
-                    <Route exact path="/" component={SkillList} />
+                    <Route exact path="/" component={PropertyProfile} />
+                    <Route path="/property-profile" component={PropertyProfile} />
                     <Route path="/skills" component={SkillList} />
                     <Route path="/skillsCreate" component={SkillCreate} />
                     <Route path="/skillsEdit/:id" component={SkillEdit} />
+                    <Route path="/demo" component={Demo} />
                     <Route render={() => <h1 className={styles.noMatch}><FormattedMessage id='404_NOTFOUND'></FormattedMessage></h1>} />
                   </Switch>
                 </div>

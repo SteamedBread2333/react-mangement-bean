@@ -1,23 +1,19 @@
 {
-    "presets": [
-      [
-        "latest",
-        {
-          "modules": false
-        }
-      ],
-      "stage-0",
-      "react"
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "mobx"
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "lib",
+        "style": true
+      }
     ],
-    "plugins": [
-      [
-        "import",
-        {
-          "libraryName": "antd",
-          "style": true
-        }
-      ],
-      "transform-runtime",
-      "transform-decorators-legacy"
-    ]
-  }
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-runtime"
+  ]
+}

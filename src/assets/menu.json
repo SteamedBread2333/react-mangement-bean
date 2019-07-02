@@ -1,0 +1,6 @@
+[
+    {"path": "/property-profile", "name": "Property Profile", "icon": "dashboard"},
+    {"path": "/alexa-devices", "name": "Alexa Devices", "icon": "amazon"},
+    {"path": "/skills", "name": "Skills", "icon": "experiment"},
+    {"path": "/rooms", "name": "Rooms", "icon": "shop"}
+]

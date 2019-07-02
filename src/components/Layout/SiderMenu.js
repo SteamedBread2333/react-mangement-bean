@@ -1,4 +1,5 @@
 import { Layout, Menu, Icon } from 'antd'
+// import DerbyIcon from '../Common/DerbyIcon'
 import { observer, inject } from 'mobx-react'
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
@@ -7,6 +8,8 @@ import styles from './SiderMenu.less'
 import { IntlProvider } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import { logo } from '../../assets'
+import menus from '../../assets/menu.json'
+// import SymbolIcon from '../Common/SymbolIcon'
 
 
 
@@ -30,17 +33,11 @@ class SiderMenu extends Component {
 
     let defaultSelectedKeys = ''
     // console.log(location)
-    switch (true) {
-      case location.pathname === '/':
-        defaultSelectedKeys = '/skills'
-        break
-      case location.pathname.search('/skills') !== -1:
-        defaultSelectedKeys = '/skills'
-        break
-      case location.pathname.search('/lalal') !== -1:
-        defaultSelectedKeys = '/lalal'
-        break
-    }
+    let selectedMenu = menus.filter(menu => 
+      location.pathname.search(menu.path) !== -1
+    )
+
+    defaultSelectedKeys = selectedMenu && selectedMenu.length ? selectedMenu[0].path : '/property-profile'
 
     const { langType } = this.props.appStore
     return (
@@ -55,22 +52,21 @@ class SiderMenu extends Component {
           <div className={styles.logo} style={{ visibility: appStore.collapsed ? 'hidden' : 'visible' }}>
             <img src={logo} alt='logo' style={{ width: 170, marginBottom: 15 }} />
             <FormattedMessage id='APP_NAME'></FormattedMessage>
+            {/* <SymbolIcon iconName={'icon-icon_shezhi'} style={{color: 'red'}} /> */}
           </div>
           <h4 className={styles.separator}></h4>
           <Menu
             theme="dark"
             style={{ border: 'none', background: '#06789d' }}
             mode={appStore.siderMode}
-            inlineCollapsed={appStore.collapsed}
             inlineIndent={20}
             defaultSelectedKeys={[defaultSelectedKeys]}
             selectedKeys={[defaultSelectedKeys]}
-            defaultOpenKeys={['data-mangment']}
             onClick={this.onSiderClick.bind(this)}
           >
-
-            <Menu.Item className={styles.menuItemTextColor} key="/skills"><Icon type="setting" /><span>Skills</span></Menu.Item>
-            {/* <Menu.Item className={`${styles.menuItem} ${styles.menuItemTextColor}`} key="/lalal">Skill Manage</Menu.Item> */}
+            {menus.map(menu => {
+              return <Menu.Item className={styles.menuItemTextColor} key={menu.path}><Icon type={menu.icon} /><span>{menu.name}</span></Menu.Item>
+            })}
           </Menu>
         </Sider>
       </IntlProvider>

@@ -28,7 +28,7 @@ class App extends Component {
 
   render() {
     const { isLogin } = this.props.appStore
-    return isLogin ? <Main /> : <Login />
+    return isLogin ? <Main /> : null
   }
 }
 

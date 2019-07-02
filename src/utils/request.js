@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 import { API_PATH } from '../constants'
 import appStore from '../stores/appStore'
 
@@ -10,10 +9,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 //请求拦截
 axios.interceptors.request.use(
   config => {
-    // if (config.method === 'post' && config.data) {
-    //   config.data = qs.stringify(config.data)
-    // }
-    config.withCredentials = true  // 需要跨域打开此配置
+    config.withCredentials = true  // 需要跨域打开此配置    
     appStore.showLoading()
     return config
   },

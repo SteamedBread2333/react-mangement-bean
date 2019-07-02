@@ -1,5 +1,6 @@
 {
     "APP_NAME": "Alexa",
+    "DEMO_LONG_TEXT": "If Text is overflow then let the more show as '...'If Text is overflow then let the more show as '...'If Text is overflow then let the more show as '...'If Text is overflow then let the more show as '...'",
     "HELLO_WORLD": "你好 世界！",
     "LOG_OUT": "注销",
     "LANGUAGE": "语言",

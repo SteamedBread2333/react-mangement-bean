@@ -1,5 +1,6 @@
 {
     "APP_NAME": "Hi Alexa",
+    "DEMO_LONG_TEXT": "If Text is overflow then let the more show as '...'If Text is overflow then let the more show as '...'If Text is overflow then let the more show as '...'If Text is overflow then let the more show as '...'",
     "HELLO_WORLD": "Hello World!",
     "LOG_OUT": "Logout",
     "LANGUAGE": "Language",

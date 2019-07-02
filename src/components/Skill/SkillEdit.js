@@ -3,7 +3,6 @@ import { observer, inject } from 'mobx-react'
 import { observable } from 'mobx';
 import { Layout, Spin, Button, Form, Input, message } from 'antd'
 import { FormattedMessage } from 'react-intl';
-import { is, fromJS } from 'immutable';
 
 const FormItem = Form.Item
 
@@ -59,7 +58,7 @@ class EditForm extends Component {
             data.contacts = data.contacts || {}
             this.skillId = data.skill.id
             this.contentId = data.content ? data.content.id : null
-            this.contractsId = data.contracts ? data.contracts.id : null
+            this.contractsId = data.contacts ? data.contacts.id : null
             const defaultValues = {
                 name: data.skill.name,
                 description: data.skill.description,
@@ -77,10 +76,6 @@ class EditForm extends Component {
         }).finally(() => {
             this.props.skillStore.loading = false
         })
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
 
     handleSubmit = e => {
@@ -108,6 +103,7 @@ class EditForm extends Component {
             if (this.contractsId) {
                 this.params.contacts.id = this.contractsId
             }
+            console.log(this.params)
             if (!err) {
                 this.props.skillStore.updateSkill(this.params)
             }

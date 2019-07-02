@@ -6,7 +6,6 @@ import { Layout, Icon, Button, Table } from 'antd'
 import { FormattedMessage } from 'react-intl';
 // import DerbyIcon from '../Common/DerbyIcon'
 import moment from 'moment'
-import { is, fromJS } from 'immutable';
 
 const { Content } = Layout
 
@@ -75,10 +74,6 @@ class SkillList extends Component {
   componentDidMount() {
     // console.log(this.props.location)
     this.props.skillStore.getSkills(1);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
   }
 
   render() {

@@ -1,6 +1,6 @@
 import Koa from 'koa'
 import webpack from 'webpack'
-import webpackConfig from '../webpack.config'
+import webpackConfig from '../config/webpack.dev.conf'
 import { devMiddleware, hotMiddleware } from 'koa-webpack-middleware'
 import httpProxy from 'http-proxy-middleware'
 import path from 'path'
@@ -13,11 +13,18 @@ const app = new Koa()
 const compile = webpack(webpackConfig)
 
 app.use(async (ctx, next) => {
-	if (ctx.url.startsWith('/AlexaService/v1/')) { //匹配有api字段的请求url
-		ctx.respond = false // 绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response        
-		await k2c(httpProxy({ target: 'http://10.200.3.121/', changeOrigin: true, secure: false, proxyTimeout: 10000 }))(ctx, next);
+	if (ctx.url.startsWith('/alexaservice/v1/')) {
+		ctx.respond = false
+		await k2c(httpProxy({ target: 'http://54.218.145.248/', changeOrigin: true, secure: false, proxyTimeout: 10000 }))(ctx, next);
 	} await next()
 })
+
+// app.use(async (ctx, next) => {
+// 	if (ctx.url.startsWith('/AlexaService/v1/')) { //匹配有api字段的请求url
+// 		ctx.respond = false // 绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response        
+// 		await k2c(httpProxy({ target: 'http://10.200.3.121/', changeOrigin: true, secure: false, proxyTimeout: 10000 }))(ctx, next);
+// 	} await next()
+// })
 
 app.use(bodyParser({
 	enableTypes: ['json', 'form', 'text']

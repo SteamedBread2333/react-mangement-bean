@@ -15,6 +15,7 @@ import skillStore from './stores/skillStore'
 const stores = { appStore, skillStore }
 
 if (module.hot) {
+  console.log('sccept');
   module.hot.accept();
 }
 

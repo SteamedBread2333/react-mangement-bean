@@ -1,7 +1,11 @@
 .contentWrapper {
     display: flex;
     flex-direction: column;
+    margin: 0 16px;
     height: 100%;
+    .breadcrumb {
+        margin: 12px 0;
+    }
 }
 
 .content {
@@ -16,8 +20,27 @@
     }
 }
 
-.header :global(.ant-menu-root)>li {
+:global(.ant-menu-root)>li {
     margin-right: 16px;
+}
+
+.header {
+     margin-right: 16px;
+     border-bottom: 1px solid #efefef; 
+     display: flex; 
+     flex-direction: row; 
+     justify-content: space-between;
+     align-items: center;
+     &:first-child {
+        cursor: pointer;
+        margin-left: 15px; 
+        line-height: 45px;
+    }
+    ul {
+        border: none;
+        line-height: 45px; 
+        flex-direction: row;
+    }
 }
 
 .noMatch {
