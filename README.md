@@ -9,7 +9,7 @@
 ### 浏览器输入 `localhost:8080`
 ## 3. 打包项目
 `./build.sh ${ajaxPath}`
-### 比如: ./build.sh http://54.218.145.248/`
+### 比如: ./build.sh http://54.218.145.248/
 ## 4. ajaxPath 索引
 ### 测试环境：http://54.218.145.248/
 ### 生产环境：暂无
@@ -24,5 +24,5 @@
 ### [mobx-react](https://github.com/mobxjs/mobx-react)
 ### [antd-design](https://ant.design/docs/react/introduce-cn)
 ### [axios](https://github.com/mzabriskie/axios)
-### [EChats(图表)](https://echarts.baidu.com/)
+<!-- ### [EChats(图表)](https://echarts.baidu.com/) -->
 ### [react-intl(国际化)](https://www.npmjs.com/package/react-intl)
