@@ -11,11 +11,13 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const CompressionPlugin = require('compression-webpack-plugin');
 
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = merge(baseWebpackConfig, {
   // 模式
   mode: "production",
   // // 调试工具
-  // devtool: '#source-map',
+  devtool: false,
   // 输出
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -37,6 +39,7 @@ module.exports = merge(baseWebpackConfig, {
     //   minRatio: 0.8,
     //   // deleteOriginalAssets: true,
     // })
+    // new BundleAnalyzerPlugin()
   ],
   // 代码分离相关
   optimization: {
@@ -78,27 +81,50 @@ module.exports = merge(baseWebpackConfig, {
     },
     splitChunks: {
       minSize: 30000,
-      minChunks: 1,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
       automaticNameDelimiter: '~',
       name: true,
-      chunks: 'initial',
+      // chunks: function (chunk) {
+      //   // 这里的name 可以参考在使用`webpack-ant-icon-loader`时指定的`chunkName`
+      //   return chunk.name !== 'antd-icons';
+      // },
       cacheGroups: {
-        common: {
-          name: 'common',
-          test: /[\\/]antd|react|react-dom|react-router-dom|react-intl|react-truncate|axios[\\/]/,
-          chunks: 'initial',
-          minSize: 0,
-          priority: 9
-        },
-        vendors: {
+        vendors: { // 项目基本框架等
           name: 'vendors',
-          minSize: 30000,
-          minChunks: 1,
-          chunks: 'initial',
-          priority: -11 // 该配置项是设置处理的优先级，数值越大越优先处理
-        }
+          test: /[\\/]react|react-dom|react-router-dom|axios|mobx[\\/]/,
+          chunks: 'all',
+          priority: 100
+        },
+        antdVenodr: { // 异步加载antd & moment包
+          test: /(antd)/,
+          priority: 100,
+          name: 'antdVenodr',
+          // chunks: function (chunk) {
+          //   // 这里的name 可以参考在使用`webpack-ant-icon-loader`时指定的`chunkName`
+          //   return chunk.name !== 'antd-icons';
+          // },
+          chunks: 'async'
+        },
+        echartsVenodr: { // 异步加载echarts包
+          test: /(echarts|zrender)/,
+          priority: 100, // 高于async-commons优先级
+          name: 'echartsVenodr',
+          chunks: 'async'
+        },
+        'async-commons': {  // 异步加载公共包、组件等
+          chunks: 'async',
+          minChunks: 2,
+          name: 'async-commons',
+          priority: 90,
+        },
+        commons: { // 其他同步加载公共包
+          chunks: 'all',
+          minChunks: 2,
+          name: 'commons',
+          priority: 80,
+        },
+
       }
     }
   }

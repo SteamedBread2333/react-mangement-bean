@@ -1,24 +1,25 @@
-import skillService from '../services/skillService'
+import intentService from '../services/intentService'
+
 import { observable, computed, action, toJS } from 'mobx';
 import { message } from 'antd'
 
-class SkillStore {
+class IntentStore {
 
-    @observable _skillsList = null
+    @observable _intentsList = null
     @observable loading = false
 
-    @computed get skillsList() {
-        return this._skillsList ? toJS(this._skillsList) : {};
+    @computed get intentsList() {
+        return this._intentsList ? toJS(this._intentsList) : {};
     }
 
     constructor(service) {
         this.service = service
     }
 
-    @action getSkills(userId) {
+    @action getIntents(userId) {
         this.loading = true
-        this.service.fetchSkills(userId).then(res => {
-            this._skillsList = res
+        this.service.fetchIntents(userId).then(res => {
+            this._intentsList = res
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -26,15 +27,15 @@ class SkillStore {
         })
     }
 
-    @action getSkill(skillId, userId) {
-        return this.service.fetchSkill(skillId, userId)
+    @action getIntent(id, userId) {
+        return this.service.fetchIntent(id, userId)
     }
 
-    @action addSkill(params, userId) {
+    @action addIntent(params, userId) {
         this.loading = true
-        this.service.createSkill(params, userId).then(res => {
+        this.service.createIntent(params, userId).then(res => {
             message.success('Success')
-            location.href = `./#/skills`
+            location.href = `./#/intents`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -42,11 +43,11 @@ class SkillStore {
         })
     }
 
-    @action updateSkill(params, userId) {
+    @action updateIntent(params, userId) {
         this.loading = true
-        this.service.updateSkill(params, userId).then(res => {
+        this.service.updateIntent(params, userId).then(res => {
             message.success('Success')
-            location.href = `./#/skills`
+            location.href = `./#/intents`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -56,6 +57,6 @@ class SkillStore {
 
 }
 
-let skillStore = new SkillStore(skillService)
+let intentStore = new IntentStore(intentService)
 
-export default skillStore
+export default intentStore

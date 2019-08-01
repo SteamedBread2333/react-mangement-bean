@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import { Layout, Collapse, Popover } from 'antd'
 import { FormattedMessage } from 'react-intl';
-import DerbyIcon from '../Common/DerbyIcon'
-import SymbolIcon from '../Common/SymbolIcon'
+// import DerbyIcon from '../../Common/DerbyIcon'
+// import SymbolIcon from '../../Common/SymbolIcon'
 import Truncate from 'react-truncate';
 import ReadMore from './ReadMore';
 import moment from 'moment'
@@ -34,10 +34,10 @@ class Demo extends Component {
                         <FormattedMessage id='APP_NAME'></FormattedMessage>
                     </Panel>
                     <Panel header="Iconfont DerbyIcon based on Ant-Icon" key={demos[1]}>
-                        <DerbyIcon type="icon-icon_shezhi" />
+                        {/* <DerbyIcon type="icon-icon_shezhi" /> */}
                     </Panel>
                     <Panel header="Iconfont private SymbolIcon" key={demos[2]}>
-                        <SymbolIcon iconName={'icon-icon_shezhi'} style={{ color: 'red' }} />
+                        {/* <SymbolIcon iconName={'icon-icon_shezhi'} style={{ color: 'red' }} /> */}
                     </Panel>
                     <Panel header="If Text is overflow then let the more show as '...'.(single-line support all explorers)" key={demos[3]}>
                         <Popover content={textOverflowText}>

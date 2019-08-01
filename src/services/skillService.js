@@ -4,19 +4,15 @@ import config from './common'
 
 export default {
     fetchSkills(userId = 1) {
-        return request.get(`${config.BASE_URL}/skill/user/${userId}`)
+        return request.get(`${config.BASE_URL}/skills/${userId}`)
     },
-    fetchSkill(skillId = 1) {
-        return request.get(`${config.BASE_URL}/scc/${skillId}`)
+    fetchSkill(skillId = 1, userId = 1) {
+        return request.get(`${config.BASE_URL}/skills/${userId}/skill/${skillId}`)
     },
-    createSkill(params){
-        return request.post(`${config.BASE_URL}/skill/add`, params)
+    createSkill(params, userId = 1){
+        return request.post(`${config.BASE_URL}/skills/${userId}/add`, params)
     },
-    updateSkill(params){
-        return request.post(`${config.BASE_URL}/skill/update`, params)
+    updateSkill(params, userId = 1){
+        return request.post(`${config.BASE_URL}/skills/${userId}/update`, params)
     }
-    // fetchSkills(userId = 1) {
-    //     // console.log('rzh', config.BASE_URL)
-    //     return request.get(`http://10.200.3.121/${config.BASE_URL}/skill/${userId}`)
-    // }
 }

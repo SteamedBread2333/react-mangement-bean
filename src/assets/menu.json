@@ -1,6 +1,11 @@
 [
     {"path": "/property-profile", "name": "Property Profile", "icon": "dashboard"},
-    {"path": "/alexa-devices", "name": "Alexa Devices", "icon": "amazon"},
+    {"path": "/hotels", "name": "Hotels", "icon": "shop"},
+    {"path": "/devices", "name": "Devices", "icon": "thunderbolt"},
     {"path": "/skills", "name": "Skills", "icon": "experiment"},
-    {"path": "/rooms", "name": "Rooms", "icon": "shop"}
+    {"path": "/intents", "name": "Intents", "icon": "branches"},
+    {"path": "/roomTypes", "name": "Room Types", "icon": "tags"},
+    {"path": "/rooms", "name": "Rooms", "icon": "home"},
+    {"path": "/contents", "name": "Contents", "icon": "api"},
+    {"path": "/contacts", "name": "Contacts", "icon": "alert"}
 ]

@@ -43,10 +43,39 @@ export const isEmptyObject = obj => {
  */
 export const getBreadInfo = (url) => {
   const breadConfig = {
-    '/property-profile': ['Property Profile', 'Home'],
-    '/skills': ['Skills', 'Skill List'],
+    '/property-profile': ['Property Profile', 'Dashboard'],
+
+    '/devices': ['Devices', 'Devices List'],
+    '/devicesEdit': ['Devices', 'Device Edit'],
+    '/devicesCreate': ['Devices', 'Device Create'],
+
+    '/hotels': ['Hotels', 'Hotels List'],
+    '/hotelsEdit': ['Hotels', 'Hotel Edit'],
+    '/hotelsCreate': ['Hotels', 'Hotel Create'],
+
+    '/skills': ['Skills', 'Skills List'],
     '/skillsEdit': ['Skills', 'Skill Edit'],
     '/skillsCreate': ['Skills', 'Skill Create'],
+
+    '/intents': ['Intents', 'Intents List'],
+    '/intentsEdit': ['Intents', 'Intent Edit'],
+    '/intentsCreate': ['Intents', 'Intent Create'],
+
+    '/rooms': ['Rooms', 'Rooms List'],
+    '/roomsEdit': ['Rooms', 'Room Edit'],
+    '/roomsCreate': ['Room', 'Room Create'],
+
+    '/roomTypes': ['Room Types', 'Room Types List'],
+    '/roomTypesEdit': ['Room Types', 'Room Type Edit'],
+    '/roomTypesCreate': ['Room Types', 'Room Type Create'],
+
+    '/contents': ['Contents', 'Contents List'],
+    '/contentsCreate': ['Contents', 'Content Create'],
+    '/contentsEdit': ['Contents', 'Content Edit'],
+    
+    '/contacts': ['Contacts', 'Contacts List'],
+    '/contactsCreate': ['Contacts', 'Contact Create'],
+    '/contactsEdit': ['Contacts', 'Contact Edit'],
   }
   let breadInfo = breadConfig[Object.keys(breadConfig).find((item, index) => item.split('/')[1] === url.split('/')[1])]
   if (url === '/') {

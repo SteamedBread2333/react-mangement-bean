@@ -10,9 +10,17 @@ import { HashRouter as Router } from 'react-router-dom'
 import App from './components/App'
 
 import appStore from './stores/appStore'
+import propertyProfileStore from './stores/propertyProfileStore'
+import hotelStore from './stores/hotelStore'
+import deviceStore from './stores/deviceStore'
 import skillStore from './stores/skillStore'
+import intentStore from './stores/intentStore'
+import roomTypeStore from './stores/roomTypeStore'
+import roomStore from './stores/roomStore'
+import contentStore from './stores/contentStore'
+import contactStore from './stores/contactStore'
 
-const stores = { appStore, skillStore }
+const stores = { appStore, propertyProfileStore, hotelStore, deviceStore, skillStore, intentStore, roomStore, roomTypeStore, contentStore, contactStore }
 
 if (module.hot) {
   console.log('sccept');

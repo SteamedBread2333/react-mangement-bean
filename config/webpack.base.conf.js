@@ -30,12 +30,22 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
     alias: {
-      '@': path.join(__dirname, '..', 'src')
+      '@': path.join(__dirname, '../', 'src')
     }
   },
   // loader
   module: {
     rules: [
+      // {
+      //   loader: 'webpack-ant-icon-loader',
+      //   enforce: 'pre',
+      //   options: {
+      //     chunkName: 'antd-icons'
+      //   },
+      //   include: [
+      //     require.resolve('@ant-design/icons/lib/dist')
+      //   ]
+      // },
       {
         test: /\.js|jsx|json$/,
         use: {
@@ -71,7 +81,7 @@ module.exports = {
         test: /\.less$/,
         use: [
           isDev ? 'style-loader'
-          : MiniCssExtractPlugin.loader,
+            : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -143,7 +153,7 @@ module.exports = {
       filename: 'login.html',
       template: './src/views/login.html',
       inject: 'body',
-      chunks: ['vendors', 'manifest', 'common', 'login'],
+      chunks: ['commons', 'manifest', 'antdVenodr', 'async-commons', 'vendors', 'login'],
       minify: { //压缩HTML文件
         removeComments: true, //移除HTML中的注释
         collapseWhitespace: false //删除空白符与换行符
@@ -155,12 +165,13 @@ module.exports = {
       filename: 'index.html',
       template: './src/views/index.html',
       inject: 'body',
-      chunks: ['vendors', 'manifest', 'common', 'app'],
+      chunks: ['commons', 'manifest', 'antdVenodr', 'echartsVenodr', 'async-commons', 'vendors', 'app'],
       minify: { //压缩HTML文件
         removeComments: true, //移除HTML中的注释
         collapseWhitespace: false //删除空白符与换行符
       }
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].[contenthash].css',

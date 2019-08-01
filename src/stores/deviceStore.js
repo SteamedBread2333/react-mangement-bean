@@ -1,24 +1,25 @@
-import skillService from '../services/skillService'
+import deviceService from '../services/deviceService'
+
 import { observable, computed, action, toJS } from 'mobx';
 import { message } from 'antd'
 
-class SkillStore {
+class DeviceStore {
 
-    @observable _skillsList = null
+    @observable _devicesList = null
     @observable loading = false
 
-    @computed get skillsList() {
-        return this._skillsList ? toJS(this._skillsList) : {};
+    @computed get devicesList() {
+        return this._devicesList ? toJS(this._devicesList) : {};
     }
 
     constructor(service) {
         this.service = service
     }
 
-    @action getSkills(userId) {
+    @action getDevices(userId) {
         this.loading = true
-        this.service.fetchSkills(userId).then(res => {
-            this._skillsList = res
+        this.service.fetchDevices(userId).then(res => {
+            this._devicesList = res
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -26,15 +27,15 @@ class SkillStore {
         })
     }
 
-    @action getSkill(skillId, userId) {
-        return this.service.fetchSkill(skillId, userId)
+    @action getDevice(id, userId) {
+        return this.service.fetchDevice(id, userId)
     }
 
-    @action addSkill(params, userId) {
+    @action addDevice(params, userId) {
         this.loading = true
-        this.service.createSkill(params, userId).then(res => {
+        this.service.createDevice(params, userId).then(res => {
             message.success('Success')
-            location.href = `./#/skills`
+            location.href = `./#/devices`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -42,11 +43,11 @@ class SkillStore {
         })
     }
 
-    @action updateSkill(params, userId) {
+    @action updateDevice(params, userId) {
         this.loading = true
-        this.service.updateSkill(params, userId).then(res => {
+        this.service.updateDevice(params, userId).then(res => {
             message.success('Success')
-            location.href = `./#/skills`
+            location.href = `./#/devices`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -56,6 +57,6 @@ class SkillStore {
 
 }
 
-let skillStore = new SkillStore(skillService)
+let deviceStore = new DeviceStore(deviceService)
 
-export default skillStore
+export default deviceStore

@@ -1,24 +1,25 @@
-import skillService from '../services/skillService'
+import roomService from '../services/roomService'
+
 import { observable, computed, action, toJS } from 'mobx';
 import { message } from 'antd'
 
-class SkillStore {
+class RoomStore {
 
-    @observable _skillsList = null
+    @observable _roomsList = null
     @observable loading = false
 
-    @computed get skillsList() {
-        return this._skillsList ? toJS(this._skillsList) : {};
+    @computed get roomsList() {
+        return this._roomsList ? toJS(this._roomsList) : {};
     }
 
     constructor(service) {
         this.service = service
     }
 
-    @action getSkills(userId) {
+    @action getRooms(userId) {
         this.loading = true
-        this.service.fetchSkills(userId).then(res => {
-            this._skillsList = res
+        this.service.fetchRooms(userId).then(res => {
+            this._roomsList = res
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -26,15 +27,15 @@ class SkillStore {
         })
     }
 
-    @action getSkill(skillId, userId) {
-        return this.service.fetchSkill(skillId, userId)
+    @action getRoom(id, userId) {
+        return this.service.fetchRoom(id, userId)
     }
 
-    @action addSkill(params, userId) {
+    @action addRoom(params, userId) {
         this.loading = true
-        this.service.createSkill(params, userId).then(res => {
+        this.service.createRoom(params, userId).then(res => {
             message.success('Success')
-            location.href = `./#/skills`
+            location.href = `./#/rooms`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -42,11 +43,11 @@ class SkillStore {
         })
     }
 
-    @action updateSkill(params, userId) {
+    @action updateRoom(params, userId) {
         this.loading = true
-        this.service.updateSkill(params, userId).then(res => {
+        this.service.updateRoom(params, userId).then(res => {
             message.success('Success')
-            location.href = `./#/skills`
+            location.href = `./#/rooms`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -56,6 +57,6 @@ class SkillStore {
 
 }
 
-let skillStore = new SkillStore(skillService)
+let roomStore = new RoomStore(roomService)
 
-export default skillStore
+export default roomStore

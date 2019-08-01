@@ -1,24 +1,41 @@
-import skillService from '../services/skillService'
+import hotelService from '../services/hotelService'
+
 import { observable, computed, action, toJS } from 'mobx';
 import { message } from 'antd'
 
-class SkillStore {
+class HotelStore {
 
-    @observable _skillsList = null
+    @observable _hotelsList = null
     @observable loading = false
 
-    @computed get skillsList() {
-        return this._skillsList ? toJS(this._skillsList) : {};
+    @computed get hotelsList() {
+        return this._hotelsList ? toJS(this._hotelsList) : {};
     }
 
     constructor(service) {
         this.service = service
     }
 
-    @action getSkills(userId) {
+    @action getHotels(userId) {
         this.loading = true
-        this.service.fetchSkills(userId).then(res => {
-            this._skillsList = res
+        this.service.fetchHotels(userId).then(res => {
+            this._hotelsList = res
+        }).catch(err => {
+            message.error(err.message)
+        }).finally(() => {
+            this.loading = false
+        })
+    }
+    
+    @action getHotel(id, userId) {
+        return this.service.fetchHotel(id, userId)
+    }
+
+    @action addHotel(params, userId) {
+        this.loading = true
+        this.service.createHotel(params, userId).then(res => {
+            message.success('Success')
+            location.href = `./#/hotels`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -26,27 +43,11 @@ class SkillStore {
         })
     }
 
-    @action getSkill(skillId, userId) {
-        return this.service.fetchSkill(skillId, userId)
-    }
-
-    @action addSkill(params, userId) {
+    @action updateHotel(params, userId) {
         this.loading = true
-        this.service.createSkill(params, userId).then(res => {
+        this.service.updateHotel(params, userId).then(res => {
             message.success('Success')
-            location.href = `./#/skills`
-        }).catch(err => {
-            message.error(err.message)
-        }).finally(() => {
-            this.loading = false
-        })
-    }
-
-    @action updateSkill(params, userId) {
-        this.loading = true
-        this.service.updateSkill(params, userId).then(res => {
-            message.success('Success')
-            location.href = `./#/skills`
+            location.href = `./#/hotels`
         }).catch(err => {
             message.error(err.message)
         }).finally(() => {
@@ -56,6 +57,6 @@ class SkillStore {
 
 }
 
-let skillStore = new SkillStore(skillService)
+let hotelStore = new HotelStore(hotelService)
 
-export default skillStore
+export default hotelStore

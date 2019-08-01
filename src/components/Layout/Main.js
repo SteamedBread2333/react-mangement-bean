@@ -9,14 +9,46 @@ import { IntlProvider } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 
 // page
-import PropertyProfile from '../PropertyProfile'
+import NotFound from '../Pages/404'
 
-import SkillList from '../Skill/SkillList'
-import SkillCreate from '../Skill/SkillCreate'
-import SkillEdit from '../Skill/SkillEdit'
+import PropertyProfile from '../Pages/PropertyProfile'
+
+import DeviceList from '../Pages/Device/DeviceList'
+import DeviceCreate from '../Pages/Device/DeviceCreate'
+import DeviceEdit from '../Pages/Device/DeviceEdit'
+
+import HotelList from '../Pages/Hotel/HotelList'
+import HotelCreate from '../Pages/Hotel/HotelCreate'
+import HotelEdit from '../Pages/Hotel/HotelEdit'
+
+import SkillList from '../Pages/Skill/SkillList'
+import SkillCreate from '../Pages/Skill/SkillCreate'
+import SkillEdit from '../Pages/Skill/SkillEdit'
+
+import IntentList from '../Pages/Intent/IntentList'
+import IntentCreate from '../Pages/Intent/IntentCreate'
+import IntentEdit from '../Pages/Intent/IntentEdit'
+
+import RoomList from '../Pages/Room/RoomList'
+import RoomCreate from '../Pages/Room/RoomCreate'
+import RoomEdit from '../Pages/Room/RoomEdit'
+
+import RoomTypeList from '../Pages/RoomType/RoomTypeList'
+import RoomTypeCreate from '../Pages/RoomType/RoomTypeCreate'
+import RoomTypeEdit from '../Pages/RoomType/RoomTypeEdit'
+
+import ContentList from '../Pages/Content/ContentList'
+import ContentCreate from '../Pages/Content/ContentCreate'
+import ContentEdit from '../Pages/Content/ContentEdit'
+
+import ContactList from '../Pages/Contact/ContactList'
+import ContactCreate from '../Pages/Contact/ContactCreate'
+import ContactEdit from '../Pages/Contact/ContactEdit'
+
+Icon.setTwoToneColor('#06789d');
 
 // demoPage
-import Demo from '../Demo/Demo'
+import Demo from '../Pages/Demo/Demo'
 
 const { Header, Content, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -72,12 +104,12 @@ class Main extends Component {
               <Header className={styles.header}>
                 <div onClick={() => { history.back(-1) }}><Icon type="left" />&nbsp;&nbsp;&nbsp;Back</div>
                 <Menu mode="horizontal" onClick={handleHeaderChick}>
-                  <SubMenu
+                  {/* <SubMenu
                     title={<FormattedMessage id='LANGUAGE'></FormattedMessage>}
                   >
                     <Menu.Item value='ch' key="ch">中文</Menu.Item>
                     <Menu.Item value='en' key="en">English</Menu.Item>
-                  </SubMenu>
+                  </SubMenu> */}
                   <SubMenu
                     title={administratorInfo.name}
                   >
@@ -86,28 +118,6 @@ class Main extends Component {
                 </Menu>
 
               </Header>
-              {/* <Tabs hideAdd type="editable-card" activeKey={activeTab.pathname} onChange={this.onTabChange.bind(this)} onEdit={this.onTabEdit.bind(this)}>
-              {
-                tabBarList.map((item, index) => {
-                  return (
-                    <TabPane tab={item.title} key={item.pathname} >
-                      {activeTab.pathname === item.pathname ? (<Content style={{ margin: '0 16px' }} className={styles.contentWrapper}>
-                        <Breadcrumb style={{ margin: '12px 0' }}>
-                          {getBreadInfo(this.props.location.pathname).map((item, index) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)}
-                        </Breadcrumb>
-                        <div className={styles.content}>
-                          <Switch>
-                            <Route exact path="/" component={User} />
-                            <Route path="/users" component={User} />
-                            <Route render={() => <h1 className={styles.noMatch}>找不到此页面</h1>} />
-                          </Switch>
-                        </div>
-                      </Content>) : ''}
-                    </TabPane>
-                  )
-                })
-              }
-            </Tabs> */}
               <Content className={styles.contentWrapper}>
                 <Breadcrumb className={styles.breadcrumb}>
                   {getBreadInfo(this.props.location.pathname).map((item, index) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)}
@@ -116,11 +126,41 @@ class Main extends Component {
                   <Switch>
                     <Route exact path="/" component={PropertyProfile} />
                     <Route path="/property-profile" component={PropertyProfile} />
+
+                    <Route path="/devices" component={DeviceList} />
+                    <Route path="/devicesCreate" component={DeviceCreate} />
+                    <Route path="/devicesEdit/:id" component={DeviceEdit} />
+                    
+                    <Route path="/hotels" component={HotelList} />
+                    <Route path="/hotelsCreate" component={HotelCreate} />
+                    <Route path="/hotelsEdit/:id" component={HotelEdit} />
+
                     <Route path="/skills" component={SkillList} />
                     <Route path="/skillsCreate" component={SkillCreate} />
                     <Route path="/skillsEdit/:id" component={SkillEdit} />
+
+                    <Route path="/intents" component={IntentList} />
+                    <Route path="/intentsCreate" component={IntentCreate} />
+                    <Route path="/intentsEdit/:id" component={IntentEdit} />
+
+                    <Route path="/rooms" component={RoomList} />
+                    <Route path="/roomsCreate" component={RoomCreate} />
+                    <Route path="/roomsEdit/:id" component={RoomEdit} />
+
+                    <Route path="/roomTypes" component={RoomTypeList} />
+                    <Route path="/roomTypesCreate" component={RoomTypeCreate} />
+                    <Route path="/roomTypesEdit/:id" component={RoomTypeEdit} />
+
+                    <Route path="/contents" component={ContentList} />
+                    <Route path="/contentsCreate" component={ContentCreate} />
+                    <Route path="/contentsEdit/:id" component={ContentEdit} />
+
+                    <Route path="/contacts" component={ContactList} />
+                    <Route path="/contactsCreate" component={ContactCreate} />
+                    <Route path="/contactsEdit/:id" component={ContactEdit} />
+
                     <Route path="/demo" component={Demo} />
-                    <Route render={() => <h1 className={styles.noMatch}><FormattedMessage id='404_NOTFOUND'></FormattedMessage></h1>} />
+                    <Route component={NotFound} />
                   </Switch>
                 </div>
               </Content>

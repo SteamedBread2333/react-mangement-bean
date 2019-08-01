@@ -32,6 +32,7 @@ module.exports = merge(baseWebpackConfig, {
       }
     },
     proxy: { '/': { target: 'http://54.218.145.248/', changeOrigin: true, secure: false, proxyTimeout: 10000 } }
+    // proxy: { '/': { target: 'http://10.200.3.121/', changeOrigin: true, secure: false, proxyTimeout: 10000 } }
   },
   // 插件
   plugins: [
