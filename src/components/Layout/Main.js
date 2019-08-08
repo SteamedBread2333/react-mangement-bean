@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { observable } from "mobx"
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb, Icon, Tabs } from 'antd'
 import SiderMenu from './SiderMenu'
@@ -47,15 +48,14 @@ import ContactEdit from '../Pages/Contact/ContactEdit'
 
 Icon.setTwoToneColor('#06789d');
 
-// demoPage
-import Demo from '../Pages/Demo/Demo'
-
 const { Header, Content, Sider } = Layout
 const SubMenu = Menu.SubMenu
 const TabPane = Tabs.TabPane
 
 @inject('appStore') @withRouter @observer
 class Main extends Component {
+
+  @observable Demo = null
 
   componentDidMount() {
     this.props.history.listen((location, type) => {
@@ -70,6 +70,13 @@ class Main extends Component {
         activeTabChanged(nextPath)
       }
     })
+    // demoPage
+    if (process.env.NODE_ENV === "development") {
+      import('../Pages/Demo/Demo').then(module => {
+        // console.log(module)
+        this.Demo = module.default
+      })
+    }
   }
 
   onTabChange(activeKey) {
@@ -90,9 +97,9 @@ class Main extends Component {
   render() {
 
     const { administratorInfo, tabBarList, langType, handleHeaderChick } = this.props.appStore
-    const activeTab = tabBarList.find((item, index) => item.active === true)
-    const data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
-
+    const { Demo } = this
+ 
+    // console.log(process.env.NODE_ENV);
     return (
       <IntlProvider locale="en" messages={langType}>
         <Layout>
@@ -130,7 +137,7 @@ class Main extends Component {
                     <Route path="/devices" component={DeviceList} />
                     <Route path="/devicesCreate" component={DeviceCreate} />
                     <Route path="/devicesEdit/:id" component={DeviceEdit} />
-                    
+
                     <Route path="/hotels" component={HotelList} />
                     <Route path="/hotelsCreate" component={HotelCreate} />
                     <Route path="/hotelsEdit/:id" component={HotelEdit} />
@@ -159,7 +166,7 @@ class Main extends Component {
                     <Route path="/contactsCreate" component={ContactCreate} />
                     <Route path="/contactsEdit/:id" component={ContactEdit} />
 
-                    <Route path="/demo" component={Demo} />
+                    {(process.env.NODE_ENV === "development" && Demo !== null) ? <Route path="/demo" component={Demo} /> : null}
                     <Route component={NotFound} />
                   </Switch>
                 </div>
